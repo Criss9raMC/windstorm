@@ -1,0 +1,73 @@
+/* 1. Reset general: Limpia márgenes por defecto del navegador */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 2. Estilos del cuerpo: Fondo negro y fuente principal */
+body {
+    background-color: #121212; /* Un negro mate sutil, más elegante que el negro puro (#000) */
+    color: #ffffff;            /* Letras completamente blancas */
+    font-family: 'Inter', sans-serif; /* Aplicamos la fuente importada */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;         /* Hace que el contenido se centre verticalmente en toda la pantalla */
+    line-height: 1.6;          /* Espaciado entre líneas de texto para mayor legibilidad */
+}
+
+/* 3. Contenedor del contenido */
+.contenedor {
+    max-width: 600px;          /* Limita el ancho del texto para que no se estire de borde a borde */
+    padding: 40px;             /* Relleno interno para que el contenido no toque los bordes del navegador */
+    text-align: left;
+}
+
+/* 4. Tipografías detalladas */
+h1 {
+    font-size: 2.5rem;         /* Tamaño grande para el título principal */
+    font-weight: 600;          /* Grosor semi-negrita */
+    letter-spacing: -0.05em;   /* Junta un poco las letras (estilo muy moderno) */
+    margin-bottom: 8px;
+}
+
+.subtitulo {
+    font-size: 1.1rem;
+    color: #a0a0a0;            /* Un gris claro para crear jerarquía visual con el título */
+    font-weight: 300;          /* Letra más delgada */
+    margin-bottom: 24px;
+}
+
+/* Línea minimalista de separación */
+.linea-divisoria {
+    border: 0;
+    height: 1px;
+    background-color: #2a2a2a; /* Línea gris muy oscura, casi invisible */
+    margin-bottom: 24px;
+}
+
+.texto-principal {
+    font-size: 1rem;
+    color: #e0e0e0;            /* Blanco suavizado para que no deslumbre al leer */
+    font-weight: 400;
+    margin-bottom: 32px;
+}
+
+/* 5. Un botón de acción moderno */
+.boton-accion {
+    display: inline-block;
+    color: #121212;            /* Texto oscuro */
+    background-color: #ffffff; /* Botón blanco (alto contraste inverso) */
+    text-decoration: none;     /* Quita la línea de subrayado del enlace */
+    padding: 12px 24px;        /* Espacio dentro del botón */
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 4px;        /* Bordes ligeramente redondeados */
+    transition: background-color 0.3s ease; /* Transición suave para el efecto hover */
+}
+
+/* Efecto al pasar el cursor sobre el botón */
+.boton-accion:hover {
+    background-color: #cccccc; /* Cambia a un gris claro */
+}
