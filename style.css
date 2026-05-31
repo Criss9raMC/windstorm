@@ -5,8 +5,8 @@
 }
 
 body {
-    /* Fondo dinámico: Un degradado oscuro que simula un cielo de tormenta nocturna */
-    background: linear-gradient(135deg, #080810 0%, #120a18 50%, #050508 100%);
+    /* Fondo cambiado a azul tormenta profundo y negro eléctrico */
+    background: linear-gradient(135deg, #020813 0%, #051329 50%, #01040a 100%);
     color: #e5e5e5;            
     font-family: 'Inter', sans-serif;
     display: flex;
@@ -14,115 +14,115 @@ body {
     align-items: center;
     min-height: 100vh;
     line-height: 1.7;
-    overflow: hidden; /* Evita barras de desplazamiento innecesarias */
+    padding: 20px;
 }
 
-/* El contenedor ahora es una "tarjeta de cristal" flotante */
+/* Contenedor estilo panel de cristal con resplandor azul */
 .contenedor {
-    max-width: 550px;         
-    padding: 50px 40px;
+    width: 100%;
+    max-width: 500px;         
+    padding: 45px 35px;
     text-align: center;
-    background: rgba(255, 255, 255, 0.02); /* Fondo casi invisible */
-    border: 1px solid rgba(255, 255, 255, 0.05); /* Borde sutil de cristal */
-    border-radius: 16px;       /* Bordes más suaves y modernos */
-    backdrop-filter: blur(8px); /* Efecto de desenfoque detrás del contenedor */
+    background: rgba(255, 255, 255, 0.01); 
+    border: 1px solid rgba(0, 149, 255, 0.08); /* Borde con tinte azul sutil */
+    border-radius: 20px;       
+    backdrop-filter: blur(12px); 
     
-    /* Sombra avanzada: Crea un sutil resplandor (glow) alrededor de la tarjeta */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
-                0 0 50px rgba(138, 43, 226, 0.05); 
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Resplandor (Glow) en color azul eléctrico */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
+                0 0 60px rgba(0, 110, 255, 0.05); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* Efecto interactivo para todo el contenedor */
 .contenedor:hover {
     transform: translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.1);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 
-                0 0 70px rgba(138, 43, 226, 0.1); /* El resplandor morado se intensifica */
+    border-color: rgba(0, 149, 255, 0.2); /* El borde brilla más al pasar el mouse */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 
+                0 0 80px rgba(0, 110, 255, 0.12); 
 }
-
-/* === IMÁGENES Y LOGO === */
 
 .logo-principal {
-    width: 140px;             
+    width: 130px;             
     height: auto;
-    margin-bottom: 24px;
-    /* Efecto de sombra para que el logo parezca flotar e iluminar por detrás */
-    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7));
+    margin-bottom: 20px;
+    filter: drop-shadow(0 10px 25px rgba(0, 110, 255, 0.2)); /* Brillo azul detrás del logo */
 }
 
-/* === TIPOGRAFÍAS === */
-
 h1 {
-    font-size: 3rem;
+    font-size: 2.8rem;
     font-weight: 600;
     letter-spacing: -0.03em;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     color: #ffffff;
-    /* Reflejo de luz sutil en el texto del título */
-    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+    text-shadow: 0 0 20px rgba(0, 149, 255, 0.2);
 }
 
 .subtitulo {
-    font-size: 0.9rem;
-    color: #9b5de5;           /* Color morado/eléctrico que combina con la temática "Storm" */
+    font-size: 0.85rem;
+    color: #0095ff;           /* Azul Eléctrico principal de WindStorm */
     font-weight: 600;
-    letter-spacing: 0.15em;    /* Letras más separadas para estilo premium */
+    letter-spacing: 0.18em;    
     text-transform: uppercase; 
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
 
 .linea-divisoria {
     border: 0;
     height: 1px;
-    /* Línea con degradado desvanecido en los extremos */
-    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
-    margin-bottom: 28px;
+    background: linear-gradient(to right, transparent, rgba(0, 149, 255, 0.2), transparent);
+    margin-bottom: 24px;
 }
 
 .texto-principal {
-    font-size: 1rem;
+    font-size: 0.95rem;
     color: #aaaaaa;           
-    font-weight: 400;
-    margin-bottom: 40px;
+    margin-bottom: 28px;
 }
 
-/* === COMPONENTES: BOTÓN DE ACCIÓN === */
+/* === ESTILOS PARA EL EMBED DE DISCORD === */
+.discord-embed {
+    width: 100%;
+    margin-bottom: 32px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
 
+.discord-embed iframe {
+    width: 100%;
+    height: 80px; /* Tamaño ideal para el formato banner de Discord */
+    display: block;
+}
+
+/* === BOTÓN DE ACCIÓN MODERNO === */
 .boton-accion {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     color: #ffffff;
-    /* Botón semi-transparente oscuro con borde brillante */
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 149, 255, 0.08); /* Fondo azul traslúcido */
+    border: 1px solid rgba(0, 149, 255, 0.3);
     text-decoration: none;
     padding: 14px 32px;
     font-weight: 600;
     font-size: 0.95rem;
     border-radius: 8px;       
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Animación ultra fluida */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%; /* El botón ahora ocupa todo el ancho disponible, haciéndolo más imponente */
 }
 
-/* Efecto hover del botón: Se vuelve blanco con texto oscuro y brilla */
 .boton-accion:hover {
-    color: #0d0d0d;
-    background-color: #ffffff;
-    border-color: #ffffff;
-    transform: scale(1.03); /* Se agranda un 3% sutilmente */
-    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); /* Resplandor blanco del botón */
-}
-
-/* Asegura que el icono cambie de color negro si pasa el mouse (para logos vectoriales transparentes) */
-.boton-accion:hover .icono-boton {
-    filter: invert(1); /* Invierte el color del icono si es necesario al volverse el fondo blanco */
+    color: #ffffff;
+    background-color: #0095ff; /* Se llena de azul sólido al pasar el mouse */
+    border-color: #0095ff;
+    transform: scale(1.02); 
+    box-shadow: 0 0 30px rgba(0, 149, 255, 0.4); /* Resplandor azul neón */
 }
 
 .icono-boton {
     width: 20px;              
     height: 20px;
     object-fit: contain;
-    transition: filter 0.3s ease;
 }
