@@ -5,7 +5,6 @@
 }
 
 body {
-    /* Fondo cambiado a azul tormenta profundo y negro eléctrico */
     background: linear-gradient(135deg, #020813 0%, #051329 50%, #01040a 100%);
     color: #e5e5e5;            
     font-family: 'Inter', sans-serif;
@@ -17,18 +16,15 @@ body {
     padding: 20px;
 }
 
-/* Contenedor estilo panel de cristal con resplandor azul */
 .contenedor {
     width: 100%;
     max-width: 500px;         
     padding: 45px 35px;
     text-align: center;
     background: rgba(255, 255, 255, 0.01); 
-    border: 1px solid rgba(0, 149, 255, 0.08); /* Borde con tinte azul sutil */
+    border: 1px solid rgba(0, 149, 255, 0.08); 
     border-radius: 20px;       
     backdrop-filter: blur(12px); 
-    
-    /* Resplandor (Glow) en color azul eléctrico */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 
                 0 0 60px rgba(0, 110, 255, 0.05); 
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -36,7 +32,7 @@ body {
 
 .contenedor:hover {
     transform: translateY(-5px);
-    border-color: rgba(0, 149, 255, 0.2); /* El borde brilla más al pasar el mouse */
+    border-color: rgba(0, 149, 255, 0.2); 
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), 
                 0 0 80px rgba(0, 110, 255, 0.12); 
 }
@@ -45,7 +41,7 @@ body {
     width: 130px;             
     height: auto;
     margin-bottom: 20px;
-    filter: drop-shadow(0 10px 25px rgba(0, 110, 255, 0.2)); /* Brillo azul detrás del logo */
+    filter: drop-shadow(0 10px 25px rgba(0, 110, 255, 0.2)); 
 }
 
 h1 {
@@ -59,7 +55,7 @@ h1 {
 
 .subtitulo {
     font-size: 0.85rem;
-    color: #0095ff;           /* Azul Eléctrico principal de WindStorm */
+    color: #0095ff;           
     font-weight: 600;
     letter-spacing: 0.18em;    
     text-transform: uppercase; 
@@ -79,30 +75,58 @@ h1 {
     margin-bottom: 28px;
 }
 
-/* === ESTILOS PARA EL EMBED DE DISCORD === */
-.discord-embed {
-    width: 100%;
+/* === NUEVOS ESTILOS DEL CONTADOR MINIMALISTA === */
+.contador-discord {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
     margin-bottom: 32px;
-    border-radius: 8px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(0, 149, 255, 0.03);
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 149, 255, 0.05);
 }
 
-.discord-embed iframe {
-    width: 100%;
-    height: 80px; /* Tamaño ideal para el formato banner de Discord */
-    display: block;
+.estado-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #ffffff;
 }
 
-/* === BOTÓN DE ACCIÓN MODERNO === */
+.etiqueta-estado {
+    font-size: 0.85rem;
+    color: #777777;
+    font-weight: 400;
+}
+
+/* Puntos de estado con brillo sutil */
+.punto-verde {
+    width: 8px;
+    height: 8px;
+    background-color: #23a55a; /* Color online oficial de Discord */
+    border-radius: 50%;
+    box-shadow: 0 0 8px #23a55a;
+}
+
+.punto-gris {
+    width: 8px;
+    height: 8px;
+    background-color: #0095ff; /* Usamos tu azul temático para los miembros */
+    border-radius: 50%;
+    box-shadow: 0 0 8px #0095ff;
+}
+
+/* === BOTÓN DE ACCIÓN === */
 .boton-accion {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     color: #ffffff;
-    background: rgba(0, 149, 255, 0.08); /* Fondo azul traslúcido */
+    background: rgba(0, 149, 255, 0.08); 
     border: 1px solid rgba(0, 149, 255, 0.3);
     text-decoration: none;
     padding: 14px 32px;
@@ -110,15 +134,15 @@ h1 {
     font-size: 0.95rem;
     border-radius: 8px;       
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    width: 100%; /* El botón ahora ocupa todo el ancho disponible, haciéndolo más imponente */
+    width: 100%; 
 }
 
 .boton-accion:hover {
     color: #ffffff;
-    background-color: #0095ff; /* Se llena de azul sólido al pasar el mouse */
+    background-color: #0095ff; 
     border-color: #0095ff;
     transform: scale(1.02); 
-    box-shadow: 0 0 30px rgba(0, 149, 255, 0.4); /* Resplandor azul neón */
+    box-shadow: 0 0 30px rgba(0, 149, 255, 0.4); 
 }
 
 .icono-boton {
