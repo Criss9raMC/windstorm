@@ -5,89 +5,124 @@
 }
 
 body {
-    background-color: #0d0d0d; /* Un fondo negro profundo y elegante */
-    color: #e5e5e5;            /* Blanco suavizado para legibilidad moderna */
+    /* Fondo dinámico: Un degradado oscuro que simula un cielo de tormenta nocturna */
+    background: linear-gradient(135deg, #080810 0%, #120a18 50%, #050508 100%);
+    color: #e5e5e5;            
     font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    line-height: 1.7;         /* Un poco más de espacio entre líneas */
+    line-height: 1.7;
+    overflow: hidden; /* Evita barras de desplazamiento innecesarias */
 }
 
+/* El contenedor ahora es una "tarjeta de cristal" flotante */
 .contenedor {
-    max-width: 550px;         /* Estrechado sutilmente para que el bloque de texto luzca más estético */
-    padding: 40px 24px;
+    max-width: 550px;         
+    padding: 50px 40px;
     text-align: center;
+    background: rgba(255, 255, 255, 0.02); /* Fondo casi invisible */
+    border: 1px solid rgba(255, 255, 255, 0.05); /* Borde sutil de cristal */
+    border-radius: 16px;       /* Bordes más suaves y modernos */
+    backdrop-filter: blur(8px); /* Efecto de desenfoque detrás del contenedor */
+    
+    /* Sombra avanzada: Crea un sutil resplandor (glow) alrededor de la tarjeta */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 
+                0 0 50px rgba(138, 43, 226, 0.05); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Efecto interactivo para todo el contenedor */
+.contenedor:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6), 
+                0 0 70px rgba(138, 43, 226, 0.1); /* El resplandor morado se intensifica */
 }
 
 /* === IMÁGENES Y LOGO === */
 
 .logo-principal {
-    width: 160px;             /* Un tamaño ligeramente más balanceado para pantallas de celular y PC */
+    width: 140px;             
     height: auto;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
+    /* Efecto de sombra para que el logo parezca flotar e iluminar por detrás */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7));
 }
 
 /* === TIPOGRAFÍAS === */
 
 h1 {
-    font-size: 2.8rem;
+    font-size: 3rem;
     font-weight: 600;
-    letter-spacing: -0.05em;
+    letter-spacing: -0.03em;
     margin-bottom: 6px;
     color: #ffffff;
+    /* Reflejo de luz sutil en el texto del título */
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
 }
 
 .subtitulo {
-    font-size: 1.1rem;
-    color: #888888;           /* Gris medio para crear una jerarquía clara */
-    font-weight: 300;
-    letter-spacing: 0.05em;
-    text-transform: uppercase; /* Subtítulo en mayúsculas sutiles */
+    font-size: 0.9rem;
+    color: #9b5de5;           /* Color morado/eléctrico que combina con la temática "Storm" */
+    font-weight: 600;
+    letter-spacing: 0.15em;    /* Letras más separadas para estilo premium */
+    text-transform: uppercase; 
     margin-bottom: 28px;
 }
 
 .linea-divisoria {
     border: 0;
     height: 1px;
-    background-color: #222222; /* Línea muy minimalista */
+    /* Línea con degradado desvanecido en los extremos */
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
     margin-bottom: 28px;
 }
 
 .texto-principal {
     font-size: 1rem;
-    color: #b3b3b3;           /* Color intermedio para el párrafo */
+    color: #aaaaaa;           
     font-weight: 400;
-    margin-bottom: 36px;
+    margin-bottom: 40px;
 }
 
-/* === COMPONENTES: BOTÓN === */
+/* === COMPONENTES: BOTÓN DE ACCIÓN === */
 
 .boton-accion {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
-    color: #0d0d0d;
-    background-color: #ffffff;
+    color: #ffffff;
+    /* Botón semi-transparente oscuro con borde brillante */
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     text-decoration: none;
-    padding: 14px 28px;
+    padding: 14px 32px;
     font-weight: 600;
     font-size: 0.95rem;
-    border-radius: 6px;       /* Bordes ligeramente más redondeados y modernos */
-    transition: all 0.2s ease-in-out; /* Transición suave para todos los efectos */
+    border-radius: 8px;       
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Animación ultra fluida */
 }
 
-/* Efecto hover moderno */
+/* Efecto hover del botón: Se vuelve blanco con texto oscuro y brilla */
 .boton-accion:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px); /* El botón "flota" ligeramente al pasar el cursor */
+    color: #0d0d0d;
+    background-color: #ffffff;
+    border-color: #ffffff;
+    transform: scale(1.03); /* Se agranda un 3% sutilmente */
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.4); /* Resplandor blanco del botón */
 }
 
-/* Icono dentro del botón */
+/* Asegura que el icono cambie de color negro si pasa el mouse (para logos vectoriales transparentes) */
+.boton-accion:hover .icono-boton {
+    filter: invert(1); /* Invierte el color del icono si es necesario al volverse el fondo blanco */
+}
+
 .icono-boton {
-    width: 20px;              /* Ajustado para que combine con el tamaño del nuevo botón */
+    width: 20px;              
     height: 20px;
     object-fit: contain;
+    transition: filter 0.3s ease;
 }
