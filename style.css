@@ -26,7 +26,7 @@ body {
 
 /* Controla el tamaño y espacio del logo principal */
 .logo-principal {
-    width: 100px;          /* Ajusta este valor según qué tan grande quieras el logo */
+    width: 200px;          /* Ajusta este valor según qué tan grande quieras el logo */
     height: auto;
     margin-bottom: 24px;  /* Separa el logo del título */
 }
