@@ -1,73 +1,87 @@
-/* 1. Reset general: Limpia márgenes por defecto del navegador */
+/* (Mantén el reset y los estilos de body e h1 que ya tenías) */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* 2. Estilos del cuerpo: Fondo negro y fuente principal */
 body {
-    background-color: #121212; /* Un negro mate sutil, más elegante que el negro puro (#000) */
-    color: #ffffff;            /* Letras completamente blancas */
-    font-family: 'Inter', sans-serif; /* Aplicamos la fuente importada */
+    background-color: #121212;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;         /* Hace que el contenido se centre verticalmente en toda la pantalla */
-    line-height: 1.6;          /* Espaciado entre líneas de texto para mayor legibilidad */
+    min-height: 100vh;
+    line-height: 1.6;
 }
 
-/* 3. Contenedor del contenido */
 .contenedor {
-    max-width: 600px;          /* Limita el ancho del texto para que no se estire de borde a borde */
-    padding: 40px;             /* Relleno interno para que el contenido no toque los bordes del navegador */
-    text-align: left;
+    max-width: 600px;
+    padding: 40px;
+    text-align: center; /* Cambiado a centrado para que combine con el logo */
 }
 
-/* 4. Tipografías detalladas */
+/* === NUEVOS ESTILOS PARA LAS IMÁGENES === */
+
+/* Controla el tamaño y espacio del logo principal */
+.logo-principal {
+    width: 60px;          /* Ajusta este valor según qué tan grande quieras el logo */
+    height: auto;
+    margin-bottom: 24px;  /* Separa el logo del título */
+}
+
 h1 {
-    font-size: 2.5rem;         /* Tamaño grande para el título principal */
-    font-weight: 600;          /* Grosor semi-negrita */
-    letter-spacing: -0.05em;   /* Junta un poco las letras (estilo muy moderno) */
+    font-size: 2.5rem;
+    font-weight: 600;
+    letter-spacing: -0.05em;
     margin-bottom: 8px;
 }
 
 .subtitulo {
     font-size: 1.1rem;
-    color: #a0a0a0;            /* Un gris claro para crear jerarquía visual con el título */
-    font-weight: 300;          /* Letra más delgada */
+    color: #a0a0a0;
+    font-weight: 300;
     margin-bottom: 24px;
 }
 
-/* Línea minimalista de separación */
 .linea-divisoria {
     border: 0;
     height: 1px;
-    background-color: #2a2a2a; /* Línea gris muy oscura, casi invisible */
+    background-color: #2a2a2a;
     margin-bottom: 24px;
 }
 
 .texto-principal {
     font-size: 1rem;
-    color: #e0e0e0;            /* Blanco suavizado para que no deslumbre al leer */
+    color: #e0e0e0;
     font-weight: 400;
     margin-bottom: 32px;
 }
 
-/* 5. Un botón de acción moderno */
+/* Ajustes al botón para alinear el icono y el texto */
 .boton-accion {
-    display: inline-block;
-    color: #121212;            /* Texto oscuro */
-    background-color: #ffffff; /* Botón blanco (alto contraste inverso) */
-    text-decoration: none;     /* Quita la línea de subrayado del enlace */
-    padding: 12px 24px;        /* Espacio dentro del botón */
+    display: inline-flex;     /* Permite alinear elementos en línea fácilmente */
+    align-items: center;      /* Centra verticalmente el icono y el texto */
+    justify-content: center;
+    gap: 10px;                /* Deja un espacio limpio entre el icono y el texto */
+    color: #121212;
+    background-color: #ffffff;
+    text-decoration: none;
+    padding: 12px 24px;
     font-weight: 600;
     font-size: 0.9rem;
-    border-radius: 4px;        /* Bordes ligeramente redondeados */
-    transition: background-color 0.3s ease; /* Transición suave para el efecto hover */
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
 }
 
-/* Efecto al pasar el cursor sobre el botón */
 .boton-accion:hover {
-    background-color: #cccccc; /* Cambia a un gris claro */
+    background-color: #cccccc;
+}
+
+/* Controla el tamaño del icono dentro del botón */
+.icono-boton {
+    width: 18px;              /* Tamaño sutil para que no compita con el texto */
+    height: 18px;
+    object-fit: contain;
 }
