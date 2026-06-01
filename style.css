@@ -75,7 +75,6 @@ h1 {
     margin-bottom: 28px;
 }
 
-/* === NUEVOS ESTILOS DEL CONTADOR MINIMALISTA === */
 .contador-discord {
     display: flex;
     justify-content: center;
@@ -102,11 +101,10 @@ h1 {
     font-weight: 400;
 }
 
-/* Puntos de estado con brillo sutil */
 .punto-verde {
     width: 8px;
     height: 8px;
-    background-color: #23a55a; /* Color online oficial de Discord */
+    background-color: #23a55a; 
     border-radius: 50%;
     box-shadow: 0 0 8px #23a55a;
 }
@@ -114,12 +112,11 @@ h1 {
 .punto-gris {
     width: 8px;
     height: 8px;
-    background-color: #0095ff; /* Usamos tu azul temático para los miembros */
+    background-color: #0095ff; 
     border-radius: 50%;
     box-shadow: 0 0 8px #0095ff;
 }
 
-/* === BOTÓN DE ACCIÓN === */
 .boton-accion {
     display: inline-flex;
     align-items: center;
