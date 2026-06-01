@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WindStorm | Staff Panel</title>
+    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .tarjeta-staff {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(0, 149, 255, 0.15);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 20px;
+            display: none; 
+        }
+        .avatar-discord {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid #0095ff;
+            box-shadow: 0 0 15px rgba(0, 149, 255, 0.4);
+            margin-bottom: 15px;
+        }
+        .rango {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-top: 10px;
+            letter-spacing: 0.05em;
+        }
+        .rango-mod { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid #eab308; }
+        .rango-build { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; }
+        .rango-dev { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid #a855f7; }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <h1>Panel de Staff</h1>
+        <p class="subtitulo">WindStorm Gestión</p>
+        <hr class="linea-divisoria">
+
+        <div id="seccion-login">
+            <p class="texto-principal">Para acceder a tus herramientas de trabajo de constructor, programador o moderador, por favor verifica tu identidad.</p>
+            <button onclick="simularLogin()" class="boton-accion">
+                <img src="Discord_idk1kDTKQj_1.png" alt="Discord" class="icono-boton">
+                <span>Identificarse con Discord</span>
+            </button>
+        </div>
+
+        <div id="panel-activo" class="tarjeta-staff">
+            <img src="https://via.placeholder.com/80" id="user-avatar" class="avatar-discord" alt="Avatar">
+            <h3 id="user-name">Usuario#0000</h3>
+            <span id="user-rango" class="rango rango-mod">Moderador</span>
+            
+            <hr class="linea-divisoria" style="margin: 20px 0;">
+            
+            <div style="text-align: left; font-size: 0.9rem; color: #aaa;">
+                <p><strong>🛠️ Próximas tareas asignadas:</strong></p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Revisar los add-ons de muebles en el servidor de pruebas.</li>
+                    <li>Sincronizar los roles con el canal de contrataciones en Discord.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Conecten la API aqui
+        function simularLogin() {
+            document.getElementById('seccion-login').style.display = 'none';
+            document.getElementById('panel-activo').style.display = 'block';
+            document.getElementById('user-name').innerText = "TuUsuario_Discord";
+            document.getElementById('user-rango').innerText = "Constructor";
+            document.getElementById('user-rango').className = "rango rango-build";
+        }
+    </script>
+</body>
+</html>
