@@ -42,7 +42,6 @@
         <p class="subtitulo">WindStorm Interno</p>
         <hr class="linea-divisoria">
 
-        <!-- FASE 1: SELECCIÓN -->
         <div id="pantalla-roles">
             <p class="texto-principal">Selecciona tu posición en el proyecto:</p>
             <div class="grupo-botones">
@@ -52,7 +51,6 @@
             </div>
         </div>
 
-        <!-- FASE 2: PASSWORD -->
         <div id="pantalla-password" class="seccion-oculta">
             <p class="texto-principal">Introduce la llave de acceso para <strong id="txt-rango-bloqueado" style="color: #0095ff;"></strong>:</p>
             <input type="password" id="input-llave" class="input-password" placeholder="Pegar contraseña aquí">
@@ -61,14 +59,13 @@
             <button class="boton-regresar" onclick="regresarARoles()">Volver</button>
         </div>
 
-        <!-- FASE 3: PANEL DINÁMICO -->
         <div id="pantalla-panel" class="seccion-oculta">
             <div id="badge-dinamico" class="badge-rango">Rango</div>
             <h3>Bitácora de Actividades</h3>
             
             <div class="nota-trabajo">
                 <p style="color: #ffffff; margin-bottom: 10px; font-weight: 600;">📋 Indicaciones en tiempo real:</p>
-                <div id="contenido-dinamico" class="cargando">Cargando instrucciones de la ciudad...</div>
+                <div id="contenido-dinamico" class="cargando">Conectando con la bitácora...</div>
             </div>
 
             <button class="boton-regresar" onclick="cerrarSesion()">Cerrar Sesión</button>
@@ -77,19 +74,19 @@
 
     <script>
         let rangoSeleccionado = "";
+        
+        // Tus contraseñas originales
         const contraseñas = {
             "Constructor": "A15W2S7C1",
             "Programador": "CryptWS!26",
             "Moderador": "WSx0dM2gg"
         };
-        
-        const URL_BASE_NOTAS = "https://gist.githubusercontent.com/Criss9raMC/9861c7d7ee133e926b28cc918b04aca9/raw/";
 
-        // Diccionario para apuntar al archivo correcto según el rol
-        const archivosNotas = {
-            "Constructor": "notas_constructores.txt",
-            "Programador": "notas_programadores.txt",
-            "Moderador": "notas_moderadores.txt"
+        // 📝 PEGA AQUÍ TUS ENLACES COMPLETOS "RAW"
+        const urlsPorRol = {
+            "Constructor": "https://gist.githubusercontent.com/Criss9raMC/0c511023db7d8421053e63c620978f51/raw/80fb21cab20f8fa0f853315d52990c38afa3a653/notas_constructores.txt",
+            "Programador": "https://gist.githubusercontent.com/Criss9raMC/a47c70e81f8699261618b0c62ec9f574/raw/4e09670a54d1b316d4a33d780bd9c2fb48ad5fe0/notas_programadores.txt",
+            "Moderador": "https://gist.githubusercontent.com/Criss9raMC/9861c7d7ee133e926b28cc918b04aca9/raw/5767b3775b1c160b8fd8ccf0138c93685bf3da5c/notas_moderadores.txt"
         };
 
         function irAPassword(rango) {
@@ -125,10 +122,10 @@
 
             const contenedorTexto = document.getElementById('contenido-dinamico');
             contenedorTexto.className = "cargando";
-            contenedorTexto.innerText = "Conectando con la bitácora...";
+            contenedorTexto.innerText = "Cargando indicaciones de la ciudad...";
 
-            // LLAMADA ASÍNCRONA: Descarga el archivo txt dinámicamente sin recargar la página
-            const urlFinal = URL_BASE_NOTAS + archivosNotas[rangoSeleccionado] + "?t=" + new Date().getTime(); // El "?t=" evita que el navegador guarde una copia vieja en caché
+            // Obtiene la URL específica de este rol y le suma la estampa de tiempo para evitar textos viejos guardados por el navegador
+            const urlFinal = urlsPorRol[rangoSeleccionado] + "?t=" + new Date().getTime(); 
             
             fetch(urlFinal)
                 .then(response => {
@@ -141,7 +138,7 @@
                 })
                 .catch(() => {
                     contenedorTexto.className = "";
-                    contenedorTexto.innerText = "❌ No se pudieron cargar las notas. Pide al moderador verificar el Gist.";
+                    contenedorTexto.innerText = "❌ Error al conectar. Verifica que el enlace sea el correcto o que la nota sea pública.";
                 });
         }
 
