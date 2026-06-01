@@ -32,7 +32,7 @@
         .badge-build { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; }
         .badge-dev { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid #a855f7; }
         .badge-mod { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid #eab308; }
-        .badge-test { background: rgba(6, 182, 212, 0.15); color: #06b6d4; border: 1px solid #06b6d4; } /* Estilo Cian para Testers */
+        .badge-test { background: rgba(6, 182, 212, 0.15); color: #06b6d4; border: 1px solid #06b6d4; }
         
         .error-msg { color: #ff4a4a; font-size: 0.9rem; margin-bottom: 15px; display: none; }
         .boton-regresar { background: transparent; border: none; color: #777; cursor: pointer; font-size: 0.85rem; margin-top: 20px; text-decoration: underline; }
@@ -47,18 +47,16 @@
         <p class="subtitulo">WindStorm Interno</p>
         <hr class="linea-divisoria">
 
-        <!-- FASE 1: SELECCIÓN -->
         <div id="pantalla-roles">
             <p class="texto-principal">Selecciona tu posición en el proyecto:</p>
             <div class="grupo-botones">
                 <button class="boton-accion" onclick="irAPassword('Constructor')">🔨 Constructor</button>
                 <button class="boton-accion" onclick="irAPassword('Programador')">💻 Programador</button>
                 <button class="boton-accion" onclick="irAPassword('Moderador')">🛡️ Moderador</button>
-                <button class="boton-accion" onclick="irAPassword('Tester')">🧪 Tester</button> <!-- Botón de Testers -->
+                <button class="boton-accion" onclick="irAPassword('Tester')">🧪 Tester</button>
             </div>
         </div>
 
-        <!-- FASE 2: PASSWORD -->
         <div id="pantalla-password" class="seccion-oculta">
             <p class="texto-principal">Introduce la llave de acceso para <strong id="txt-rango-bloqueado" style="color: #0095ff;"></strong>:</p>
             <input type="password" id="input-llave" class="input-password" placeholder="Pegar contraseña aquí">
@@ -67,7 +65,6 @@
             <button class="boton-regresar" onclick="regresarARoles()">Volver</button>
         </div>
 
-        <!-- FASE 3: PANEL DINÁMICO -->
         <div id="pantalla-panel" class="seccion-oculta">
             <div id="badge-dinamico" class="badge-rango">Rango</div>
             <h3>Bitácora de Actividades</h3>
@@ -84,7 +81,6 @@
     <script>
         let rangoSeleccionado = "";
         
-        // Contraseñas del Staff (Incluyendo la nueva de Testers)
         const contraseñas = {
             "Constructor": "A15W2S7C1",
             "Programador": "CryptWS!26",
@@ -92,11 +88,10 @@
             "Tester": "WSt3St!26"
         };
 
-        // Enlaces directos RAW para consumir las notas
         const urlsPorRol = {
             "Constructor": "https://gist.githubusercontent.com/Criss9raMC/0c511023db7d8421053e63c620978f51/raw/80fb21cab20f8fa0f853315d52990c38afa3a653/notas_constructores.txt",
             "Programador": "https://gist.githubusercontent.com/Criss9raMC/a47c70e81f8699261618b0c62ec9f574/raw/4e09670a54d1b316d4a33d780bd9c2fb48ad5fe0/notas_programadores.txt",
-            "Moderador": "https://gist.githubusercontent.com/Criss9raMC/9861c7d7ee133e926b28cc918b04aca9/raw/5767b3775b1c160b8fd8ccf0138c93685bf3da5c/notas_moderadores.txt"
+            "Moderador": "https://gist.githubusercontent.com/Criss9raMC/9861c7d7ee133e926b28cc918b04aca9/raw/5767b3775b1c160b8fd8ccf0138c93685bf3da5c/notas_moderadores.txt", // <-- Aquí estaba el error (faltaba esta coma)
             "Tester": "https://gist.githubusercontent.com/Criss9raMC/02ebe9f1d1c2622beba6f898b78684a6/raw/6f1455d141cd6c0a32a395a96d4b345aafc29ff8/notas_testers.txt"
         };
 
@@ -130,7 +125,6 @@
             const badge = document.getElementById('badge-dinamico');
             badge.innerText = rangoSeleccionado;
             
-            // Asignación de clases CSS visuales según el rango
             if (rangoSeleccionado === "Constructor") badge.className = "badge-rango badge-build";
             else if (rangoSeleccionado === "Programador") badge.className = "badge-rango badge-dev";
             else if (rangoSeleccionado === "Moderador") badge.className = "badge-rango badge-mod";
@@ -140,7 +134,6 @@
             contenedorTexto.className = "cargando";
             contenedorTexto.innerText = "Cargando indicaciones de la ciudad...";
 
-            // Consulta asíncrona rompiendo la caché del navegador para texto inmediato
             const urlFinal = urlsPorRol[rangoSeleccionado] + "?t=" + new Date().getTime(); 
             
             fetch(urlFinal)
