@@ -4,82 +4,200 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WindStorm | Staff Panel</title>
-
-    <link rel="icon" href="BCO.7108c793-6c04-402d-b014-0e9ec52ea876.png" type="image/png">
-    
     <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        .tarjeta-staff {
+        /* Estilos específicos para el flujo manual de Staff */
+        .seccion-oculta {
+            display: none;
+        }
+        .grupo-botones {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .input-password {
+            width: 100%;
+            padding: 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 149, 255, 0.2);
+            border-radius: 8px;
+            color: #ffffff;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .input-password:focus {
+            border-color: #0095ff;
+            box-shadow: 0 0 10px rgba(0, 149, 255, 0.3);
+        }
+        .nota-trabajo {
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(0, 149, 255, 0.15);
-            border-radius: 16px;
-            padding: 30px;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: left;
             margin-top: 20px;
-            display: none; 
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
-        .avatar-discord {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid #0095ff;
-            box-shadow: 0 0 15px rgba(0, 149, 255, 0.4);
-            margin-bottom: 15px;
-        }
-        .rango {
+        .badge-rango {
             display: inline-block;
-            padding: 6px 16px;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            margin-top: 10px;
+            margin-bottom: 15px;
             letter-spacing: 0.05em;
         }
-        .rango-mod { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid #eab308; }
-        .rango-build { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; }
-        .rango-dev { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid #a855f7; }
+        .badge-build { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; }
+        .badge-dev { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid #a855f7; }
+        .badge-mod { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid #eab308; }
+        
+        .error-msg {
+            color: #ff4a4a;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            display: none;
+        }
+        .boton-regresar {
+            background: transparent;
+            border: none;
+            color: #777;
+            cursor: pointer;
+            font-size: 0.85rem;
+            margin-top: 20px;
+            text-decoration: underline;
+        }
+        .boton-regresar:hover { color: #0095ff; }
     </style>
 </head>
 <body>
 
     <div class="contenedor">
         <h1>Panel de Staff</h1>
-        <p class="subtitulo">WindStorm Gestión</p>
+        <p class="subtitulo">WindStorm Interno</p>
         <hr class="linea-divisoria">
 
-        <div id="seccion-login">
-            <p class="texto-principal">Para acceder a tus herramientas de trabajo de constructor, programador o moderador, por favor verifica tu identidad.</p>
-            <button onclick="simularLogin()" class="boton-accion">
-                <img src="idk1kDTKQj_1780205813460.png" alt="Discord" class="icono-boton">
-                <span>Identificarse con Discord</span>
-            </button>
+        <div id="pantalla-roles">
+            <p class="texto-principal">Selecciona tu posición en el proyecto para ingresar a tu bitácora de trabajo:</p>
+            <div class="grupo-botones">
+                <button class="boton-accion" onclick="irAPassword('Constructor')">🔨 Constructor</button>
+                <button class="boton-accion" onclick="irAPassword('Programador')">💻 Programador</button>
+                <button class="boton-accion" onclick="irAPassword('Moderador')">🛡️ Moderador</button>
+            </div>
         </div>
 
-        <div id="panel-activo" class="tarjeta-staff">
-            <img src="https://via.placeholder.com/80" id="user-avatar" class="avatar-discord" alt="Avatar">
-            <h3 id="user-name">Usuario#0000</h3>
-            <span id="user-rango" class="rango rango-mod">Moderador</span>
+        <div id="pantalla-password" class="seccion-oculta">
+            <p class="texto-principal">Introduce la llave de acceso para el rango de <strong id="txt-rango-bloqueado" style="color: #0095ff;"></strong>:</p>
             
-            <hr class="linea-divisoria" style="margin: 20px 0;">
+            <input type="password" id="input-llave" class="input-password" placeholder="Pegar contraseña aquí">
+            <p id="error-texto" class="error-msg">⚠️ Contraseña incorrecta. Inténtalo de nuevo.</p>
             
-            <div style="text-align: left; font-size: 0.9rem; color: #aaa;">
-                <p><strong>🛠️ Próximas tareas asignadas:</strong></p>
-                <ul style="margin-left: 20px; margin-top: 10px;">
-                    <li>Revisar los add-ons de muebles en el servidor de pruebas.</li>
-                    <li>Sincronizar los roles con el canal de contrataciones en Discord.</li>
-                </ul>
+            <button class="boton-accion" onclick="verificarPassword()">Ingresar al Panel</button>
+            <button class="boton-regresar" onclick="regresarARoles()">Volver a los roles</button>
+        </div>
+
+        <div id="pantalla-panel" class="seccion-oculta">
+            <div id="badge-dinamico" class="badge-rango">Rango</div>
+            <h3>Bitácora de Actividades</h3>
+            
+            <div class="nota-trabajo">
+                <p style="color: #ffffff; margin-bottom: 10px; font-weight: 600;">📋 Indicaciones del Moderador:</p>
+                <div id="nota-build" class="seccion-oculta">
+                    <p style="color: #aaaaaa;">Actualmente estás asignado al área de expansión urbana. Tus tareas son:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px; color: #aaaaaa;">
+                        <li>Continuar con los detalles internos del edificio avanzado.</li>
+                        <li>Planificar el trazado de las calles principales para la zona residencial.</li>
+                    </ul>
+                </div>
+                <div id="nota-dev" class="seccion-oculta">
+                    <p style="color: #aaaaaa;">Estado del entorno técnico de WindStorm:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px; color: #aaaaaa;">
+                        <li>Revisar la compatibilidad de los Add-ons de muebles instalados.</li>
+                        <li>Mantener en pausa el desarrollo de la API externa hasta nuevo aviso.</li>
+                    </ul>
+                </div>
+                <div id="nota-mod" class="seccion-oculta">
+                    <p style="color: #aaaaaa;">Instrucciones de gestión comunitaria:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px; color: #aaaaaa;">
+                        <li>Monitorear el canal de contrataciones en Discord.</li>
+                        <li>Actualizar las notas de trabajo para constructores y programadores según los avances del mapa.</li>
+                    </ul>
+                </div>
             </div>
+
+            <button class="boton-regresar" onclick="cerrarSesion()">Cerrar Sesión</button>
         </div>
     </div>
 
     <script>
-        // Conecten la API aqui
-        function simularLogin() {
-            document.getElementById('seccion-login').style.display = 'none';
-            document.getElementById('panel-activo').style.display = 'block';
-            document.getElementById('user-name').innerText = "TuUsuario_Discord";
-            document.getElementById('user-rango').innerText = "Constructor";
-            document.getElementById('user-rango').className = "rango rango-build";
+        let rangoSeleccionado = "";
+
+        // Diccionario seguro de contraseñas asignadas por el director
+        const contraseñas = {
+            "Constructor": "A15W2S7C1",
+            "Programador": "CryptWS!26",
+            "Moderador": "WSx0dM2gg"
+        };
+
+        function irAPassword(rango) {
+            rangoSeleccionado = rango;
+            document.getElementById('pantalla-roles').style.display = 'none';
+            document.getElementById('pantalla-password').style.display = 'block';
+            document.getElementById('txt-rango-bloqueado').innerText = rango;
+            document.getElementById('input-llave').value = "";
+            document.getElementById('error-texto').style.display = 'none';
+        }
+
+        function regresarARoles() {
+            document.getElementById('pantalla-password').style.display = 'none';
+            document.getElementById('pantalla-roles').style.display = 'block';
+        }
+
+        function verificarPassword() {
+            const contraseñaIngresada = document.getElementById('input-llave').value.trim();
+            const contraseñaCorrecta = contraseñas[rangoSeleccionado];
+
+            if (contraseñaIngresada === contraseñaCorrecta) {
+                desplegarPanel();
+            } else {
+                document.getElementById('error-texto').style.display = 'block';
+            }
+        }
+
+        function desplegarPanel() {
+            document.getElementById('pantalla-password').style.display = 'none';
+            document.getElementById('pantalla-panel').style.display = 'block';
+            
+            // Configurar el Badge visual
+            const badge = document.getElementById('badge-dinamico');
+            badge.innerText = rangoSeleccionado;
+            
+            // Ocultar todas las notas primero
+            document.getElementById('nota-build').style.display = 'none';
+            document.getElementById('nota-dev').style.display = 'none';
+            document.getElementById('nota-mod').style.display = 'none';
+
+            // Mostrar la nota correspondiente al rango que ingresó
+            if (rangoSeleccionado === "Constructor") {
+                badge.className = "badge-rango badge-build";
+                document.getElementById('nota-build').style.display = 'block';
+            } else if (rangoSeleccionado === "Programador") {
+                badge.className = "badge-rango badge-dev";
+                document.getElementById('nota-dev').style.display = 'block';
+            } else if (rangoSeleccionado === "Moderador") {
+                badge.className = "badge-rango badge-mod";
+                document.getElementById('nota-mod').style.display = 'block';
+            }
+        }
+
+        function cerrarSesion() {
+            document.getElementById('pantalla-panel').style.display = 'none';
+            document.getElementById('pantalla-roles').style.display = 'block';
         }
     </script>
 </body>
