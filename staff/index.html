@@ -4,75 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WindStorm | Staff Panel</title>
-    <link rel="stylesheet" href="style.css"> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* Estilos específicos para el flujo manual de Staff */
-        .seccion-oculta {
-            display: none;
-        }
-        .grupo-botones {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
+        .seccion-oculta { display: none; }
+        .grupo-botones { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
         .input-password {
-            width: 100%;
-            padding: 14px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 149, 255, 0.2);
-            border-radius: 8px;
-            color: #ffffff;
-            font-family: 'Inter', sans-serif;
-            font-size: 1rem;
-            text-align: center;
-            margin-bottom: 20px;
-            outline: none;
-            transition: border-color 0.3s;
+            width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(0, 149, 255, 0.2); border-radius: 8px;
+            color: #ffffff; font-family: 'Inter', sans-serif; font-size: 1rem;
+            text-align: center; margin-bottom: 20px; outline: none; transition: border-color 0.3s;
         }
-        .input-password:focus {
-            border-color: #0095ff;
-            box-shadow: 0 0 10px rgba(0, 149, 255, 0.3);
-        }
+        .input-password:focus { border-color: #0095ff; box-shadow: 0 0 10px rgba(0, 149, 255, 0.3); }
         .nota-trabajo {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(0, 149, 255, 0.15);
-            border-radius: 12px;
-            padding: 25px;
-            text-align: left;
-            margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(0, 149, 255, 0.15);
+            border-radius: 12px; padding: 25px; text-align: left; margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); white-space: pre-line; color: #aaaaaa;
         }
         .badge-rango {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            letter-spacing: 0.05em;
+            display: inline-block; padding: 4px 12px; border-radius: 20px;
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            margin-bottom: 15px; letter-spacing: 0.05em;
         }
         .badge-build { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; }
         .badge-dev { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid #a855f7; }
         .badge-mod { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid #eab308; }
-        
-        .error-msg {
-            color: #ff4a4a;
-            font-size: 0.9rem;
-            margin-bottom: 15px;
-            display: none;
-        }
-        .boton-regresar {
-            background: transparent;
-            border: none;
-            color: #777;
-            cursor: pointer;
-            font-size: 0.85rem;
-            margin-top: 20px;
-            text-decoration: underline;
-        }
+        .error-msg { color: #ff4a4a; font-size: 0.9rem; margin-bottom: 15px; display: none; }
+        .boton-regresar { background: transparent; border: none; color: #777; cursor: pointer; font-size: 0.85rem; margin-top: 20px; text-decoration: underline; }
         .boton-regresar:hover { color: #0095ff; }
+        .cargando { color: #0095ff; font-style: italic; }
     </style>
 </head>
 <body>
@@ -82,8 +42,9 @@
         <p class="subtitulo">WindStorm Interno</p>
         <hr class="linea-divisoria">
 
+        <!-- FASE 1: SELECCIÓN -->
         <div id="pantalla-roles">
-            <p class="texto-principal">Selecciona tu posición en el proyecto para ingresar a tu bitácora de trabajo:</p>
+            <p class="texto-principal">Selecciona tu posición en el proyecto:</p>
             <div class="grupo-botones">
                 <button class="boton-accion" onclick="irAPassword('Constructor')">🔨 Constructor</button>
                 <button class="boton-accion" onclick="irAPassword('Programador')">💻 Programador</button>
@@ -91,43 +52,23 @@
             </div>
         </div>
 
+        <!-- FASE 2: PASSWORD -->
         <div id="pantalla-password" class="seccion-oculta">
-            <p class="texto-principal">Introduce la llave de acceso para el rango de <strong id="txt-rango-bloqueado" style="color: #0095ff;"></strong>:</p>
-            
+            <p class="texto-principal">Introduce la llave de acceso para <strong id="txt-rango-bloqueado" style="color: #0095ff;"></strong>:</p>
             <input type="password" id="input-llave" class="input-password" placeholder="Pegar contraseña aquí">
-            <p id="error-texto" class="error-msg">⚠️ Contraseña incorrecta. Inténtalo de nuevo.</p>
-            
+            <p id="error-texto" class="error-msg">⚠️ Contraseña incorrecta.</p>
             <button class="boton-accion" onclick="verificarPassword()">Ingresar al Panel</button>
-            <button class="boton-regresar" onclick="regresarARoles()">Volver a los roles</button>
+            <button class="boton-regresar" onclick="regresarARoles()">Volver</button>
         </div>
 
+        <!-- FASE 3: PANEL DINÁMICO -->
         <div id="pantalla-panel" class="seccion-oculta">
             <div id="badge-dinamico" class="badge-rango">Rango</div>
             <h3>Bitácora de Actividades</h3>
             
             <div class="nota-trabajo">
-                <p style="color: #ffffff; margin-bottom: 10px; font-weight: 600;">📋 Indicaciones del Moderador:</p>
-                <div id="nota-build" class="seccion-oculta">
-                    <p style="color: #aaaaaa;">Actualmente estás asignado al área de expansión urbana. Tus tareas son:</p>
-                    <ul style="margin-left: 20px; margin-top: 10px; color: #aaaaaa;">
-                        <li>Continuar con los detalles internos del edificio avanzado.</li>
-                        <li>Planificar el trazado de las calles principales para la zona residencial.</li>
-                    </ul>
-                </div>
-                <div id="nota-dev" class="seccion-oculta">
-                    <p style="color: #aaaaaa;">Estado del entorno técnico de WindStorm:</p>
-                    <ul style="margin-left: 20px; margin-top: 10px; color: #aaaaaa;">
-                        <li>Revisar la compatibilidad de los Add-ons de muebles instalados.</li>
-                        <li>Mantener en pausa el desarrollo de la API externa hasta nuevo aviso.</li>
-                    </ul>
-                </div>
-                <div id="nota-mod" class="seccion-oculta">
-                    <p style="color: #aaaaaa;">Instrucciones de gestión comunitaria:</p>
-                    <ul style="margin-left: 20px; margin-top: 10px; color: #aaaaaa;">
-                        <li>Monitorear el canal de contrataciones en Discord.</li>
-                        <li>Actualizar las notas de trabajo para constructores y programadores según los avances del mapa.</li>
-                    </ul>
-                </div>
+                <p style="color: #ffffff; margin-bottom: 10px; font-weight: 600;">📋 Indicaciones en tiempo real:</p>
+                <div id="contenido-dinamico" class="cargando">Cargando instrucciones de la ciudad...</div>
             </div>
 
             <button class="boton-regresar" onclick="cerrarSesion()">Cerrar Sesión</button>
@@ -136,12 +77,19 @@
 
     <script>
         let rangoSeleccionado = "";
-
-        // Diccionario seguro de contraseñas asignadas por el director
         const contraseñas = {
             "Constructor": "A15W2S7C1",
             "Programador": "CryptWS!26",
             "Moderador": "WSx0dM2gg"
+        };
+        
+        const URL_BASE_NOTAS = "https://gist.githubusercontent.com/Criss9raMC/9861c7d7ee133e926b28cc918b04aca9/raw/5767b3775b1c160b8fd8ccf0138c93685bf3da5c/";
+
+        // Diccionario para apuntar al archivo correcto según el rol
+        const archivosNotas = {
+            "Constructor": "notas_constructores.txt",
+            "Programador": "notas_programadores.txt",
+            "Moderador": "notas_moderadores.txt"
         };
 
         function irAPassword(rango) {
@@ -160,9 +108,7 @@
 
         function verificarPassword() {
             const contraseñaIngresada = document.getElementById('input-llave').value.trim();
-            const contraseñaCorrecta = contraseñas[rangoSeleccionado];
-
-            if (contraseñaIngresada === contraseñaCorrecta) {
+            if (contraseñaIngresada === contraseñas[rangoSeleccionado]) {
                 desplegarPanel();
             } else {
                 document.getElementById('error-texto').style.display = 'block';
@@ -173,26 +119,30 @@
             document.getElementById('pantalla-password').style.display = 'none';
             document.getElementById('pantalla-panel').style.display = 'block';
             
-            // Configurar el Badge visual
             const badge = document.getElementById('badge-dinamico');
             badge.innerText = rangoSeleccionado;
-            
-            // Ocultar todas las notas primero
-            document.getElementById('nota-build').style.display = 'none';
-            document.getElementById('nota-dev').style.display = 'none';
-            document.getElementById('nota-mod').style.display = 'none';
+            badge.className = "badge-rango " + (rangoSeleccionado === "Constructor" ? "badge-build" : rangoSeleccionado === "Programador" ? "badge-dev" : "badge-mod");
 
-            // Mostrar la nota correspondiente al rango que ingresó
-            if (rangoSeleccionado === "Constructor") {
-                badge.className = "badge-rango badge-build";
-                document.getElementById('nota-build').style.display = 'block';
-            } else if (rangoSeleccionado === "Programador") {
-                badge.className = "badge-rango badge-dev";
-                document.getElementById('nota-dev').style.display = 'block';
-            } else if (rangoSeleccionado === "Moderador") {
-                badge.className = "badge-rango badge-mod";
-                document.getElementById('nota-mod').style.display = 'block';
-            }
+            const contenedorTexto = document.getElementById('contenido-dinamico');
+            contenedorTexto.className = "cargando";
+            contenedorTexto.innerText = "Conectando con la bitácora...";
+
+            // LLAMADA ASÍNCRONA: Descarga el archivo txt dinámicamente sin recargar la página
+            const urlFinal = URL_BASE_NOTAS + archivosNotas[rangoSeleccionado] + "?t=" + new Date().getTime(); // El "?t=" evita que el navegador guarde una copia vieja en caché
+            
+            fetch(urlFinal)
+                .then(response => {
+                    if (!response.ok) throw new Error();
+                    return response.text();
+                })
+                .then(texto => {
+                    contenedorTexto.className = "";
+                    contenedorTexto.innerText = texto;
+                })
+                .catch(() => {
+                    contenedorTexto.className = "";
+                    contenedorTexto.innerText = "❌ No se pudieron cargar las notas. Pide al moderador verificar el Gist.";
+                });
         }
 
         function cerrarSesion() {
