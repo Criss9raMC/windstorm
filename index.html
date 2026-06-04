@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="style.css">
     
     <style>
-        /* Control de subpáginas fluidas */
         .seccion-oculta {
             display: none !important;
         }
@@ -23,7 +22,7 @@
             color: #777;
             cursor: pointer;
             font-size: 0.85rem;
-            margin-top: 20px;
+            margin-top: 25px;
             text-decoration: underline;
             display: inline-block;
             width: 100%;
@@ -31,6 +30,19 @@
         }
         .boton-volver:hover { 
             color: #0095ff; 
+        }
+        /* Ajuste para que el botón secundario mantenga el estilo pero con fondo sutil */
+        .boton-info-secundario {
+            background: rgba(255, 255, 255, 0.02) !important;
+            border: 1px solid rgba(0, 149, 255, 0.2) !important;
+            margin-top: 15px;
+            cursor: pointer;
+            color: white;
+            font-family: 'Inter', sans-serif;
+        }
+        .boton-info-secundario:hover {
+            background: rgba(0, 149, 255, 0.1) !important;
+            border-color: #0095ff !important;
         }
     </style>
 </head>
@@ -65,13 +77,11 @@
                 <span>Únete a nuestro Discord</span>
             </a>
 
-            <div style="margin-top: 15px; text-align: center;">
-                <button onclick="mostrarInfo()" class="boton-accion" style="background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(0, 149, 255, 0.2); max-width: 200px; margin: 0 auto; display: block; font-size: 0.9rem; cursor: pointer; font-family: 'Inter', sans-serif; color: white;">
-                    ➕ Más Información
-                </button>
-            </div>
+            <button onclick="mostrarInfo()" class="boton-accion boton-info-secundario">
+                <span>➕ Más Información</span>
+            </button>
 
-            <div style="margin-top: 25px; text-align: center;">
+            <div style="margin-top: 30px; text-align: center;">
                 <a href="staff" style="font-size: 0.8rem; color: rgba(0, 149, 255, 0.4); text-decoration: none; font-weight: 400; transition: color 0.3s;" onmouseover="this.style.color='#0095ff'" onmouseout="this.style.color='rgba(0, 149, 255, 0.4)'">
                     Panel de Gestión de Staff
                 </a>
@@ -113,12 +123,11 @@
                 </div>
             </div>
 
-            <button class="boton-volver" onclick="regresarInicio()"> Anclar al inicio</button>
+            <button class="boton-volver" onclick="regresarInicio()">⬅️ Volver al inicio</button>
         </div>
     </div>
 
     <script>
-        // Funciones para alternar entre subpáginas sin recargar
         function mostrarInfo() {
             document.getElementById('pantalla-inicio').classList.add('seccion-oculta');
             document.getElementById('pantalla-info').classList.remove('seccion-oculta');
@@ -129,7 +138,6 @@
             document.getElementById('pantalla-inicio').classList.remove('seccion-oculta');
         }
 
-        // API de Discord Widgets
         fetch('https://discord.com/api/guilds/1508959317544407140/widget.json')
             .then(response => response.json())
             .then(data => {
