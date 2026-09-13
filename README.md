@@ -4,3 +4,5 @@ Explora una ciudad sin límites donde tu libertad es la única regla. Actualment
 <a href="https://discord.gg/qnxMMkYfgz">Unete a nuestro Discord</a>
 <h3>Proximas actualizaciones</h3>
 No hay proximas actualizaciones
+<h3>Colaboradores</h3>
+Encriptador - ItsDarexMC (Fundador de Ametium Developement) - <a>https://www.ametium.dev/</a>
