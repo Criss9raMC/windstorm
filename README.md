@@ -6,4 +6,4 @@ Explora una ciudad sin límites donde tu libertad es la única regla. Actualment
 No hay proximas actualizaciones
 <h3>Colaboradores</h3>
 Encriptador - ItsDarexMC (Fundador de Ametium Developement) - 
-<a> herf="https://www.ametium.dev/">ametium.dev</a>
+<a href="https://www.ametium.dev">ametium.dev</a>
