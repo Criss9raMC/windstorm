@@ -3,84 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WindStorm | Staff Panel</title>
+    <title>Panel de staff | WindStorm City Life RP</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#020813">
 
-    <link rel="icon" href="BCO.7108c793-6c04-402d-b014-0e9ec52ea876.png" type="image/png">
-    
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <style>
-        .seccion-oculta { display: none; }
-        .grupo-botones { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
-        .input-password {
-            width: 100%; padding: 14px; background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(0, 149, 255, 0.2); border-radius: 8px;
-            color: #ffffff; font-family: 'Inter', sans-serif; font-size: 1rem;
-            text-align: center; margin-bottom: 20px; outline: none; transition: border-color 0.3s;
-        }
-        .input-password:focus { border-color: #0095ff; box-shadow: 0 0 10px rgba(0, 149, 255, 0.3); }
-        .nota-trabajo {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(0, 149, 255, 0.15);
-            border-radius: 12px; padding: 25px; text-align: left; margin-top: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); white-space: pre-line; color: #aaaaaa;
-        }
-        .badge-rango {
-            display: inline-block; padding: 4px 12px; border-radius: 20px;
-            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
-            margin-bottom: 15px; letter-spacing: 0.05em;
-        }
-        .badge-build { background: rgba(34, 197, 94, 0.15); color: #22c55e; border: 1px solid #22c55e; }
-        .badge-dev { background: rgba(168, 85, 247, 0.15); color: #a855f7; border: 1px solid #a855f7; }
-        .badge-mod { background: rgba(234, 179, 8, 0.15); color: #eab308; border: 1px solid #eab308; }
-        .badge-test { background: rgba(6, 182, 212, 0.15); color: #06b6d4; border: 1px solid #06b6d4; }
-        
-        .error-msg { color: #ff4a4a; font-size: 0.9rem; margin-bottom: 15px; display: none; }
-        .boton-regresar { background: transparent; border: none; color: #777; cursor: pointer; font-size: 0.85rem; margin-top: 20px; text-decoration: underline; }
-        .boton-regresar:hover { color: #0095ff; }
-        .cargando { color: #0095ff; font-style: italic; }
-    </style>
+    <link rel="icon" href="../favicon.ico" sizes="any">
+    <link rel="icon" href="../favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../home.css">
+    <link rel="stylesheet" href="staff.css">
 </head>
 <body>
 
-    <div class="contenedor">
-        <h1>Panel de Staff</h1>
-        <p class="subtitulo">WindStorm Interno</p>
-        <hr class="linea-divisoria">
+    <header class="nav">
+        <a class="nav-logo" href="../" aria-label="WindStorm, inicio">
+            <img src="../logo.png" alt="">
+        </a>
+        <nav class="nav-links" aria-label="Principal">
+            <a href="../">Inicio</a>
+            <a href="./" aria-current="page">Panel de staff</a>
+        </nav>
+    </header>
 
-        <div id="pantalla-roles">
-            <p class="texto-principal">Selecciona tu posición en el proyecto:</p>
-            <div class="grupo-botones">
-                <button class="boton-accion" onclick="irAPassword('Constructor')">🔨 Constructor</button>
-                <button class="boton-accion" onclick="irAPassword('Programador')">💻 Programador</button>
-                <button class="boton-accion" onclick="irAPassword('Moderador')">🛡️ Moderador</button>
-                <button class="boton-accion" onclick="irAPassword('Tester')">🧪 Tester</button>
+    <main>
+        <section class="hero hero-compact">
+            <img class="hero-bg" src="../imagen.png" alt="">
+            <div class="hero-inner">
+                <div class="brand-row">
+                    <img class="brand-logo" src="../logo.png" alt="Escudo de WindStorm City Life RP">
+                    <h1><span class="accent">WindStorm</span> Panel de staff</h1>
+                </div>
+                <p class="hero-desc">Acceso interno para el equipo. Elige tu rol para ver las indicaciones del proyecto.</p>
             </div>
-        </div>
+        </section>
 
-        <div id="pantalla-password" class="seccion-oculta">
-            <p class="texto-principal">Introduce la llave de acceso para <strong id="txt-rango-bloqueado" style="color: #0095ff;"></strong>:</p>
-            <input type="password" id="input-llave" class="input-password" placeholder="Pegar contraseña aquí">
-            <p id="error-texto" class="error-msg">⚠️ Contraseña incorrecta.</p>
-            <button class="boton-accion" onclick="verificarPassword()">Ingresar al Panel</button>
-            <button class="boton-regresar" onclick="regresarARoles()">Volver</button>
-        </div>
+        <div class="wrap">
+            <section class="card staff-card">
 
-        <div id="pantalla-panel" class="seccion-oculta">
-            <div id="badge-dinamico" class="badge-rango">Rango</div>
-            <h3>Bitácora de Actividades</h3>
-            
-            <div class="nota-trabajo">
-                <p style="color: #ffffff; margin-bottom: 10px; font-weight: 600;">📋 Indicaciones en tiempo real:</p>
-                <div id="contenido-dinamico" class="cargando">Conectando con la bitácora...</div>
-            </div>
+                <div id="pantalla-roles">
+                    <h2>Elige tu rol</h2>
+                    <p class="hint">Necesitarás la llave de acceso de tu equipo.</p>
+                    <div class="roles">
+                        <button class="role" data-rol="Constructor" style="--c:#22c55e"><i class="swatch"></i>Constructor</button>
+                        <button class="role" data-rol="Programador" style="--c:#a855f7"><i class="swatch"></i>Programador</button>
+                        <button class="role" data-rol="Moderador" style="--c:#eab308"><i class="swatch"></i>Moderador</button>
+                        <button class="role" data-rol="Tester" style="--c:#06b6d4"><i class="swatch"></i>Tester</button>
+                    </div>
+                </div>
 
-            <button class="boton-regresar" onclick="cerrarSesion()">Cerrar Sesión</button>
+                <div id="pantalla-password" hidden>
+                    <h2>Acceso de <span id="txt-rango-bloqueado" style="color: var(--accent)"></span></h2>
+                    <div class="field">
+                        <label for="input-llave">Llave de acceso</label>
+                        <input type="password" id="input-llave" placeholder="Pega la contraseña aquí" autocomplete="off">
+                    </div>
+                    <p id="error-texto" class="error" role="alert" hidden>Contraseña incorrecta.</p>
+                    <div class="actions">
+                        <button class="btn" id="btn-ingresar" type="button">Ingresar al panel</button>
+                        <button class="btn btn-ghost" id="btn-volver" type="button">Volver</button>
+                    </div>
+                </div>
+
+                <div id="pantalla-panel" hidden>
+                    <span id="badge-dinamico" class="badge">Rol</span>
+                    <h2>Bitácora de actividades</h2>
+                    <p class="hint">Indicaciones en tiempo real para tu equipo.</p>
+                    <div id="contenido-dinamico" class="notes loading" aria-live="polite">Conectando con la bitácora...</div>
+                    <div class="actions">
+                        <button class="btn btn-ghost" id="btn-salir" type="button">Cerrar sesión</button>
+                    </div>
+                </div>
+
+            </section>
         </div>
-    </div>
+    </main>
+
+    <footer class="footer">
+        <span>© WindStorm</span>
+        <a href="../">Volver a la página principal</a>
+    </footer>
 
     <script>
         let rangoSeleccionado = "";
-        
+
         const contraseñas = {
             "Constructor": "A15W2S7C1",
             "Programador": "CryptWS!26",
@@ -91,70 +100,57 @@
         const urlsPorRol = {
             "Constructor": "https://gist.githubusercontent.com/Criss9raMC/0c511023db7d8421053e63c620978f51/raw/80fb21cab20f8fa0f853315d52990c38afa3a653/notas_constructores.txt",
             "Programador": "https://gist.githubusercontent.com/Criss9raMC/a47c70e81f8699261618b0c62ec9f574/raw/4e09670a54d1b316d4a33d780bd9c2fb48ad5fe0/notas_programadores.txt",
-            "Moderador": "https://gist.githubusercontent.com/Criss9raMC/9861c7d7ee133e926b28cc918b04aca9/raw/5767b3775b1c160b8fd8ccf0138c93685bf3da5c/notas_moderadores.txt", // <-- Aquí estaba el error (faltaba esta coma)
+            "Moderador": "https://gist.githubusercontent.com/Criss9raMC/9861c7d7ee133e926b28cc918b04aca9/raw/5767b3775b1c160b8fd8ccf0138c93685bf3da5c/notas_moderadores.txt",
             "Tester": "https://gist.githubusercontent.com/Criss9raMC/02ebe9f1d1c2622beba6f898b78684a6/raw/6f1455d141cd6c0a32a395a96d4b345aafc29ff8/notas_testers.txt"
         };
 
+        const colores = { "Constructor": "#22c55e", "Programador": "#a855f7", "Moderador": "#eab308", "Tester": "#06b6d4" };
+
+        const $ = id => document.getElementById(id);
+        const pantallas = ["pantalla-roles", "pantalla-password", "pantalla-panel"];
+        function mostrar(id) { pantallas.forEach(p => { $(p).hidden = p !== id; }); }
+
         function irAPassword(rango) {
             rangoSeleccionado = rango;
-            document.getElementById('pantalla-roles').style.display = 'none';
-            document.getElementById('pantalla-password').style.display = 'block';
-            document.getElementById('txt-rango-bloqueado').innerText = rango;
-            document.getElementById('input-llave').value = "";
-            document.getElementById('error-texto').style.display = 'none';
-        }
-
-        function regresarARoles() {
-            document.getElementById('pantalla-password').style.display = 'none';
-            document.getElementById('pantalla-roles').style.display = 'block';
+            $("txt-rango-bloqueado").textContent = rango;
+            $("input-llave").value = "";
+            $("error-texto").hidden = true;
+            mostrar("pantalla-password");
+            $("input-llave").focus();
         }
 
         function verificarPassword() {
-            const contraseñaIngresada = document.getElementById('input-llave').value.trim();
-            if (contraseñaIngresada === contraseñas[rangoSeleccionado]) {
+            if ($("input-llave").value.trim() === contraseñas[rangoSeleccionado]) {
                 desplegarPanel();
             } else {
-                document.getElementById('error-texto').style.display = 'block';
+                $("error-texto").hidden = false;
             }
         }
 
         function desplegarPanel() {
-            document.getElementById('pantalla-password').style.display = 'none';
-            document.getElementById('pantalla-panel').style.display = 'block';
-            
-            const badge = document.getElementById('badge-dinamico');
-            badge.innerText = rangoSeleccionado;
-            
-            if (rangoSeleccionado === "Constructor") badge.className = "badge-rango badge-build";
-            else if (rangoSeleccionado === "Programador") badge.className = "badge-rango badge-dev";
-            else if (rangoSeleccionado === "Moderador") badge.className = "badge-rango badge-mod";
-            else if (rangoSeleccionado === "Tester") badge.className = "badge-rango badge-test";
+            mostrar("pantalla-panel");
+            const badge = $("badge-dinamico");
+            badge.textContent = rangoSeleccionado;
+            badge.style.setProperty("--c", colores[rangoSeleccionado]);
 
-            const contenedorTexto = document.getElementById('contenido-dinamico');
-            contenedorTexto.className = "cargando";
-            contenedorTexto.innerText = "Cargando indicaciones de la ciudad...";
+            const caja = $("contenido-dinamico");
+            caja.className = "notes loading";
+            caja.textContent = "Cargando indicaciones de la ciudad...";
 
-            const urlFinal = urlsPorRol[rangoSeleccionado] + "?t=" + new Date().getTime(); 
-            
-            fetch(urlFinal)
-                .then(response => {
-                    if (!response.ok) throw new Error();
-                    return response.text();
-                })
-                .then(texto => {
-                    contenedorTexto.className = "";
-                    contenedorTexto.innerText = texto;
-                })
+            fetch(urlsPorRol[rangoSeleccionado] + "?t=" + Date.now())
+                .then(r => { if (!r.ok) throw new Error(); return r.text(); })
+                .then(texto => { caja.className = "notes"; caja.textContent = texto; })
                 .catch(() => {
-                    contenedorTexto.className = "";
-                    contenedorTexto.innerText = "❌ Error al conectar. Verifica que el enlace sea el correcto o que la nota sea pública.";
+                    caja.className = "notes";
+                    caja.textContent = "No se pudo cargar la bitácora. Revisa que el enlace sea correcto y que la nota sea pública.";
                 });
         }
 
-        function cerrarSesion() {
-            document.getElementById('pantalla-panel').style.display = 'none';
-            document.getElementById('pantalla-roles').style.display = 'block';
-        }
+        document.querySelectorAll(".role").forEach(b => b.addEventListener("click", () => irAPassword(b.dataset.rol)));
+        $("btn-ingresar").addEventListener("click", verificarPassword);
+        $("input-llave").addEventListener("keydown", e => { if (e.key === "Enter") verificarPassword(); });
+        $("btn-volver").addEventListener("click", () => mostrar("pantalla-roles"));
+        $("btn-salir").addEventListener("click", () => mostrar("pantalla-roles"));
     </script>
 </body>
 </html>
