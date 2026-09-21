@@ -3,151 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WindStorm | Minecraft Server</title>
-    
+    <title>WindStorm | Servidor de Minecraft</title>
+    <meta name="description" content="Explora una ciudad sin límites donde tu libertad es la única regla. Servidor de Minecraft Bedrock en desarrollo.">
+
     <link rel="icon" href="BCO.7108c793-6c04-402d-b014-0e9ec52ea876.png" type="image/png">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    
-    <style>
-        .seccion-oculta {
-            display: none !important;
-        }
-        .boton-volver {
-            background: transparent;
-            border: none;
-            color: #777;
-            cursor: pointer;
-            font-size: 0.85rem;
-            margin-top: 25px;
-            text-decoration: underline;
-            display: inline-block;
-            width: 100%;
-            text-align: center;
-        }
-        .boton-volver:hover { 
-            color: #0095ff; 
-        }
-        /* Ajuste para que el botón secundario mantenga el estilo pero con fondo sutil */
-        .boton-info-secundario {
-            background: rgba(255, 255, 255, 0.02) !important;
-            border: 1px solid rgba(0, 149, 255, 0.2) !important;
-            margin-top: 15px;
-            cursor: pointer;
-            color: white;
-            font-family: 'Inter', sans-serif;
-        }
-        .boton-info-secundario:hover {
-            background: rgba(0, 149, 255, 0.1) !important;
-            border-color: #0095ff !important;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css">
 </head>
 <body>
 
-    <div class="contenedor">
-        <img src="BCO.7108c793-6c04-402d-b014-0e9ec52ea876.png" alt="Logo WindStorm" class="logo-principal">
-        <h1>WindStorm</h1>
-        <p class="subtitulo">Servidor de Minecraft</p>
-        <hr class="linea-divisoria">
+    <header class="nav">
+        <a class="nav-logo" href="#inicio" aria-label="WindStorm, inicio">
+            <img src="logo-nav.png" alt="">
+        </a>
+        <nav class="nav-links" aria-label="Principal">
+            <a href="#inicio" aria-current="page">Inicio</a>
+            <a href="#informacion">Información</a>
+        </nav>
+    </header>
 
-        <div id="pantalla-inicio">
-            <p class="texto-principal">
-                Explora una ciudad sin límites donde tu libertad es la única regla. 
-                Actualmente el servidor se encuentra en fase de desarrollo, pero puedes unirte 
-                a nuestra comunidad para enterarte de los avances y aportar ideas.
-            </p>
+    <main>
+        <section class="hero" id="inicio">
+            <img class="hero-bg" src="fondo-logo.png" alt="">
+            <div class="hero-inner">
+                <h1><span class="accent">WindStorm</span> Servidor de Minecraft</h1>
+                <p class="hero-desc">
+                    Explora una ciudad sin límites donde tu libertad es la única regla.
+                    El servidor está en desarrollo: únete a la comunidad para seguir los
+                    avances y aportar ideas.
+                </p>
 
-            <div class="contador-discord">
-                <div class="estado-item">
-                    <span class="punto-verde"></span>
-                    <span id="discord-online">--</span> <span class="etiqueta-estado">En línea</span>
+                <div class="hero-links">
+                    <a href="#informacion">Información</a>
+                    <a href="https://discord.gg/qnxMMkYfgz" target="_blank" rel="noopener">Discord →</a>
                 </div>
-                <div class="estado-item">
-                    <span class="punto-gris"></span>
-                    <span id="discord-total">--</span> <span class="etiqueta-estado">Miembros</span>
+
+                <dl class="stats">
+                    <div class="stat"><dt>Edición</dt><dd>Bedrock</dd></div>
+                    <div class="stat"><dt>Estado</dt><dd>En desarrollo</dd></div>
+                    <div class="stat"><dt>Discord</dt><dd id="stat-discord">...</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <div class="wrap">
+            <section class="discord-card" aria-label="Comunidad de Discord">
+                <div class="icon"><img src="idk1kDTKQj_1780205813460.png" alt="Discord"></div>
+                <div class="info">
+                    <h2>Comunidad WindStorm</h2>
+                    <p class="counts">
+                        <span><i class="dot"></i><b id="discord-total" style="font-weight:400">--</b> en total</span>
+                        <span><i class="dot on"></i><b id="discord-online" style="font-weight:400">--</b> en línea</span>
+                    </p>
                 </div>
-            </div>
-
-            <a href="https://discord.gg/qnxMMkYfgz" target="_blank" class="boton-accion">
-                <img src="idk1kDTKQj_1780205813460.png" alt="Discord" class="icono-boton"> 
-                <span>Únete a nuestro Discord</span>
-            </a>
-
-            <button onclick="mostrarInfo()" class="boton-accion boton-info-secundario">
-                <span>➕ Más Información</span>
-            </button>
-
-            <div style="margin-top: 30px; text-align: center;">
-                <a href="staff" style="font-size: 0.8rem; color: rgba(0, 149, 255, 0.4); text-decoration: none; font-weight: 400; transition: color 0.3s;" onmouseover="this.style.color='#0095ff'" onmouseout="this.style.color='rgba(0, 149, 255, 0.4)'">
-                    Panel de Gestión de Staff
-                </a>
-            </div>
+                <a class="btn" href="https://discord.gg/qnxMMkYfgz" target="_blank" rel="noopener">Unirme al Discord</a>
+            </section>
         </div>
 
-        <div id="pantalla-info" class="seccion-oculta" style="text-align: left;">
-            <h3 style="font-size: 1.1rem; color: #ffffff; margin-bottom: 20px; font-weight: 600; text-align: center; letter-spacing: 0.05em;">
-                📊 DATOS DEL SERVIDOR
-            </h3>
+        <section class="section" id="informacion">
+            <h2>Información del servidor</h2>
+            <p class="lead">Datos para conectarte cuando el servidor abra.</p>
 
-            <div style="background: rgba(255, 255, 255, 0.01); border: 1px solid rgba(0, 149, 255, 0.1); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 15px;">
-                
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
-                    <span style="color: #777; font-size: 0.9rem;">👑 Creador / Owner</span>
-                    <span style="color: #0095ff; font-weight: 600; font-size: 0.95rem;">Criss9raMC</span>
+            <dl class="details">
+                <div><dt>Creador</dt><dd>Criss9raMC</dd></div>
+                <div>
+                    <dt>Programador de Java</dt>
+                    <dd>ItsDarexMC<small>Fundador de <a href="https://www.ametium.dev" target="_blank" rel="noopener">Ametium Development</a></small></dd>
                 </div>
+                <div><dt>IP (Bedrock)</dt><dd>No disponible</dd></div>
+                <div><dt>Puerto</dt><dd>No disponible</dd></div>
+                <div><dt>Versión</dt><dd>Bedrock 1.21.8 - 1.26.2</dd></div>
+                <div><dt>Contenido</dt><dd>Muebles y bloques activos</dd></div>
+                <div><dt>Próximas actualizaciones</dt><dd>Ninguna por ahora</dd></div>
+            </dl>
+        </section>
+    </main>
 
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
-                    <span style="color: #777; font-size: 0.9rem;">🌐 IP (Bedrock)</span>
-                    <span style="color: #ffffff; font-family: monospace; font-size: 0.95rem; background: rgba(0, 149, 255, 0.1); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(0,149,255,0.2);">No disponible</span>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
-                    <span style="color: #777; font-size: 0.9rem;">🔌 Puerto</span>
-                    <span style="color: #ffffff; font-family: monospace; font-size: 0.95rem;">No disponible</span>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
-                    <span style="color: #777; font-size: 0.9rem;">🎮 Versión</span>
-                    <span style="color: #aaaaaa; font-size: 0.9rem;">Bedrock 1.21.8 - 1.26.2</span>
-                </div>
-
-                <div style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 5px;">
-                    <span style="color: #777; font-size: 0.9rem;">📦 Contenido</span>
-                    <span style="color: #06b6d4; font-size: 0.85rem; background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.2); padding: 2px 10px; border-radius: 20px; font-weight: 600;">
-                        Muebles & Bloques Activos
-                    </span>
-                </div>
-            </div>
-
-            <button class="boton-volver" onclick="regresarInicio()">⬅️ Volver al inicio</button>
-        </div>
-    </div>
+    <footer class="footer">
+        <span>© WindStorm</span>
+        <a href="staff">Panel de staff</a>
+    </footer>
 
     <script>
-        function mostrarInfo() {
-            document.getElementById('pantalla-inicio').classList.add('seccion-oculta');
-            document.getElementById('pantalla-info').classList.remove('seccion-oculta');
+        const INVITE = 'qnxMMkYfgz';
+        const GUILD = '1508959317544407140';
+        const fmt = n => Number(n).toLocaleString('es-MX');
+
+        function pintar(total, online) {
+            if (total != null) document.getElementById('discord-total').textContent = fmt(total);
+            if (online != null) document.getElementById('discord-online').textContent = fmt(online);
+            const s = document.getElementById('stat-discord');
+            s.textContent = total != null ? fmt(total) + ' miembros' : (online != null ? fmt(online) + ' en línea' : '—');
         }
 
-        function regresarInicio() {
-            document.getElementById('pantalla-info').classList.add('seccion-oculta');
-            document.getElementById('pantalla-inicio').classList.remove('seccion-oculta');
-        }
-
-        fetch('https://discord.com/api/guilds/1508959317544407140/widget.json')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('discord-online').innerText = data.presence_count;
-                document.getElementById('discord-total').innerText = data.members.length ? data.members.length + 10 : data.presence_count * 3; 
-            })
-            .catch(() => {
-                document.getElementById('discord-online').innerText = "Activo";
-                document.getElementById('discord-total').innerText = "Comunidad";
-            });
+        // Conteo real desde la invitación; si falla, usa el widget del servidor.
+        fetch(`https://discord.com/api/v9/invites/${INVITE}?with_counts=true`)
+            .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+            .then(d => pintar(d.approximate_member_count, d.approximate_presence_count))
+            .catch(() =>
+                fetch(`https://discord.com/api/guilds/${GUILD}/widget.json`)
+                    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+                    .then(d => pintar(null, d.presence_count))
+                    .catch(() => pintar(null, null))
+            );
     </script>
 </body>
 </html>
