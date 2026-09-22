@@ -50,6 +50,74 @@ a { color: inherit; text-decoration: none; }
 .nav-links a { color: var(--muted); transition: color .2s; }
 .nav-links a:hover, .nav-links a[aria-current="page"] { color: var(--text); }
 
+/* ---------- Menú móvil (hamburguesa) ---------- */
+.nav-burger {
+    display: none;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 38px;
+    height: 38px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+}
+.nav-burger span {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: transform .25s, opacity .25s, top .25s;
+}
+.nav-burger span:nth-child(1) { top: 13px; }
+.nav-burger span:nth-child(2) { top: 19px; }
+.nav-burger span:nth-child(3) { top: 25px; }
+.nav.is-open .nav-burger span:nth-child(1) { top: 19px; transform: rotate(45deg); }
+.nav.is-open .nav-burger span:nth-child(2) { opacity: 0; }
+.nav.is-open .nav-burger span:nth-child(3) { top: 19px; transform: rotate(-45deg); }
+
+.nav-mobile-panel { display: none; }
+
+@media (max-width: 720px) {
+    .nav { justify-content: flex-start; }
+    .nav-links { display: none; }
+    .nav-burger { display: block; }
+
+    .nav-mobile-panel {
+        position: fixed;
+        inset: 54px 0 0 0;
+        z-index: 9;
+        background: rgba(2, 8, 19, 0.98);
+        backdrop-filter: blur(14px);
+        transform: translateY(-8px);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: opacity .2s, transform .2s, visibility .2s;
+    }
+    .nav.is-open + .nav-mobile-panel {
+        display: block;
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    .nav-mobile-panel nav { display: flex; flex-direction: column; padding: 8px 22px 28px; }
+    .nav-mobile-panel a {
+        padding: 18px 0;
+        border-bottom: 1px solid var(--line-soft);
+        color: var(--muted);
+        font-size: 1.05rem;
+        font-weight: 500;
+    }
+    .nav-mobile-panel a:last-child { border-bottom: 0; }
+    .nav-mobile-panel a[aria-current="page"] { color: var(--accent); }
+}
+
 /* ---------- Hero ---------- */
 .hero {
     position: relative;

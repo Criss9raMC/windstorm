@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="home.css">
 </head>
 <body>
-
     <header class="nav">
         <a class="nav-logo" href="#inicio" aria-label="WindStorm, inicio">
             <img src="logo.png" alt="">
@@ -30,7 +29,18 @@
             <a href="informacion/">Información</a>
             <a href="redes-sociales/">Redes Sociales</a>
         </nav>
+        <button class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+            <span></span><span></span><span></span>
+        </button>
     </header>
+    <div class="nav-mobile-panel" id="menu-movil">
+        <nav aria-label="Principal (móvil)">
+            <a href="#inicio" aria-current="page">Inicio</a>
+            <a href="informacion/">Información</a>
+            <a href="redes-sociales/">Redes Sociales</a>
+            <a href="staff/">Panel de staff</a>
+        </nav>
+    </div>
 
     <main>
         <section class="hero" id="inicio">
@@ -147,5 +157,6 @@
                     .catch(() => pintar(null, null))
             );
     </script>
+    <script src="nav.js" defer></script>
 </body>
 </html>
