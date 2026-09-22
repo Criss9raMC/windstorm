@@ -14,8 +14,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../home.css">
-    <link rel="stylesheet" href="staff.css">
+    <link rel="stylesheet" href="../home.css?v=2">
+    <link rel="stylesheet" href="staff.css?v=2">
 </head>
 <body>
 
@@ -29,7 +29,18 @@
             <a href="../redes-sociales/">Redes Sociales</a>
             <a href="./" aria-current="page">Panel de staff</a>
         </nav>
+        <button class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+            <span></span><span></span><span></span>
+        </button>
     </header>
+    <div class="nav-mobile-panel" id="menu-movil">
+        <nav aria-label="Principal (móvil)">
+            <a href="../">Inicio</a>
+            <a href="../informacion/">Información</a>
+            <a href="../redes-sociales/">Redes Sociales</a>
+            <a href="./" aria-current="page">Panel de staff</a>
+        </nav>
+    </div>
 
     <main>
         <section class="hero hero-compact">
@@ -154,5 +165,6 @@
         $("btn-volver").addEventListener("click", () => mostrar("pantalla-roles"));
         $("btn-salir").addEventListener("click", () => mostrar("pantalla-roles"));
     </script>
+    <script src="../nav.js?v=2" defer></script>
 </body>
 </html>
