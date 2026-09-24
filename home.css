@@ -159,6 +159,9 @@ a { color: inherit; text-decoration: none; }
     line-height: 1.05;
     letter-spacing: -0.035em;
     text-shadow: 0 0 24px rgba(0, 149, 255, 0.18);
+    min-width: 0;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 .hero h1 .accent { color: var(--accent); }
 
@@ -242,12 +245,19 @@ a { color: inherit; text-decoration: none; }
     .hero-inner { padding: 56px 22px 52px; }
     .hero-bg { width: 100%; opacity: calc(var(--imagen-opacity) * 0.5); }
     .brand-row { gap: 18px; }
+    .brand-logo { height: clamp(72px, 20vw, 104px); }
+    .hero h1 { font-size: clamp(1.9rem, 9vw, 3.2rem); }
     .wrap { padding: 0 16px; }
     .discord-card { flex-wrap: wrap; padding: 26px 22px; margin-top: 48px; }
     .discord-card .btn { width: 100%; text-align: center; }
     .section { padding-top: 64px; }
-    .details div { flex-direction: column; gap: 2px; }
-    .details dd { text-align: left; }
+    .details div { flex-direction: column; gap: 2px; }    .details dd { text-align: left; }
+}
+
+@media (max-width: 480px) {
+    .brand-row { flex-direction: column; align-items: flex-start; gap: 14px; }
+    .brand-logo { height: 84px; }
+    .hero h1 { font-size: clamp(2rem, 11vw, 2.6rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -360,4 +370,60 @@ a { color: inherit; text-decoration: none; }
 
 @media (max-width: 860px) {
     .embed-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Colaboradores ---------- */
+.colab-grid {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+.colab-card {
+    position: relative;
+    padding: 30px 24px 26px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 14px;
+    overflow: hidden;
+}
+
+.colab-card .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex: none;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--line-soft);
+}
+.colab-card .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+.colab-card .name { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; }
+.colab-card .role {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.colab-card.top {
+    border-color: rgba(0, 149, 255, 0.35);
+    box-shadow: 0 0 0 1px rgba(0, 149, 255, 0.18), 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+.colab-card.top .role { color: #57b7ff; }
+
+/* Tarjeta con color propio por colaborador (definido en línea con --colab-bg / --colab-role) */
+.colab-card.tinted {
+    background: color-mix(in srgb, var(--colab-bg, var(--accent)) 22%, var(--surface));
+    border-color: color-mix(in srgb, var(--colab-bg, var(--accent)) 55%, transparent);
+}
+.colab-card.tinted .role { color: var(--colab-role, var(--accent)); }
+.colab-card.tinted .avatar {
+    background: var(--colab-bg, var(--surface));
+    border-color: color-mix(in srgb, var(--colab-bg, var(--accent)) 65%, transparent);
 }
