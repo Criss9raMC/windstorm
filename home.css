@@ -402,6 +402,7 @@ a { color: inherit; text-decoration: none; }
 }
 .colab-card .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
+.colab-card .desc { margin-top: 6px; font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
 .colab-card .name { font-family: var(--font-display); font-weight: 700; font-size: 1.08rem; }
 .colab-card .role {
     font-size: 0.82rem;
