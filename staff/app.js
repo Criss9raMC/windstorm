@@ -43,11 +43,7 @@
         badge.textContent = user.roleLabel;
 
         const avatar = $('user-avatar');
-        if (user.avatar) {
-            avatar.src = user.avatar;
-        } else {
-            avatar.src = 'https://cdn.discordapp.com/embed/avatars/0.png';
-        }
+        avatar.src = user.avatar || 'https://cdn.discordapp.com/embed/avatars/0.png';
     }
 
     function fechaCorta(iso) {
@@ -57,18 +53,28 @@
 
     const AUDIENCIAS = {
         all: 'Todo el staff',
+        admin: 'Admins',
         constructor: 'Constructores',
         programador: 'Programadores',
         moderacion: 'Moderación',
         tester: 'Testers',
     };
 
+    function escapeHtml(str) {
+        const d = document.createElement('div');
+        d.textContent = str;
+        return d.innerHTML;
+    }
+
     function renderNota(nota) {
         const div = document.createElement('div');
         div.className = 'note-card' + (nota.read ? '' : ' unread');
         div.dataset.id = nota.id;
 
-        const vistoPor = (nota.readers || []).map((r) => r.username).join(', ') || 'nadie todavía';
+        const readers = nota.readers || [];
+        const listaVistos = readers.length
+            ? readers.map((r) => `<li>${escapeHtml(r.username)} <span>· ${fechaCorta(r.read_at)}</span></li>`).join('')
+            : '<li class="empty">Nadie la ha visto todavía</li>';
 
         div.innerHTML = `
             <div class="note-top">
@@ -79,16 +85,38 @@
             <p>${escapeHtml(nota.body)}</p>
             <div class="note-meta">
                 <span>Por ${escapeHtml(nota.created_by)} · ${fechaCorta(nota.created_at)}</span>
-                <span class="note-seen" title="Quién la ha visto: ${escapeHtml(vistoPor)}">👁 ${(nota.readers || []).length}</span>
+                <span class="note-meta-actions">
+                    <button type="button" class="note-seen" aria-expanded="false">👁 ${readers.length}</button>
+                    ${nota.canDelete ? '<button type="button" class="note-delete" title="Borrar nota">🗑</button>' : ''}
+                </span>
             </div>
+            <ul class="note-readers" hidden>${listaVistos}</ul>
         `;
+
+        div.querySelector('.note-seen').addEventListener('click', (e) => {
+            const lista = div.querySelector('.note-readers');
+            const abierta = !lista.hidden;
+            lista.hidden = abierta;
+            e.currentTarget.setAttribute('aria-expanded', String(!abierta));
+        });
+
+        const btnBorrar = div.querySelector('.note-delete');
+        if (btnBorrar) {
+            btnBorrar.addEventListener('click', () => borrarNota(nota.id, div));
+        }
+
         return div;
     }
 
-    function escapeHtml(str) {
-        const d = document.createElement('div');
-        d.textContent = str;
-        return d.innerHTML;
+    async function borrarNota(id, elemento) {
+        if (!confirm('¿Borrar esta nota? No se puede deshacer.')) return;
+
+        const res = await fetch('/api/notes?id=' + id, { method: 'DELETE' });
+        if (res.ok) {
+            elemento.remove();
+        } else {
+            alert('No se pudo borrar la nota.');
+        }
     }
 
     async function cargarNotas() {
@@ -125,10 +153,51 @@
         });
     }
 
+    // ---------- Menú desplegable flotante de "¿Para quién es?" ----------
+    let audienciaSeleccionada = 'all';
+
+    function initDropdownAudiencia() {
+        const dropdown = $('audiencia-dropdown');
+        const toggle = $('audiencia-toggle');
+        const menu = $('audiencia-menu');
+        const actual = $('audiencia-actual');
+
+        function abrir() {
+            menu.hidden = false;
+            toggle.setAttribute('aria-expanded', 'true');
+        }
+        function cerrar() {
+            menu.hidden = true;
+            toggle.setAttribute('aria-expanded', 'false');
+        }
+
+        toggle.addEventListener('click', () => {
+            if (menu.hidden) abrir(); else cerrar();
+        });
+
+        menu.querySelectorAll('.dropdown-option').forEach((opt) => {
+            opt.addEventListener('click', () => {
+                audienciaSeleccionada = opt.dataset.value;
+                actual.textContent = opt.textContent;
+                menu.querySelectorAll('.dropdown-option').forEach((o) => {
+                    o.classList.toggle('is-selected', o === opt);
+                    o.setAttribute('aria-selected', String(o === opt));
+                });
+                cerrar();
+            });
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!dropdown.contains(e.target)) cerrar();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') cerrar();
+        });
+    }
+
     async function publicarNota() {
         const title = $('nota-titulo').value.trim();
         const body = $('nota-cuerpo').value.trim();
-        const audience = $('nota-audiencia').value;
         const errorEl = $('nota-error');
         errorEl.hidden = true;
 
@@ -141,7 +210,7 @@
         const res = await fetch('/api/notes', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title, body, audience }),
+            body: JSON.stringify({ title, body, audience: audienciaSeleccionada }),
         });
 
         if (!res.ok) {
@@ -158,5 +227,6 @@
     $('btn-publicar').addEventListener('click', publicarNota);
     $('btn-salir').addEventListener('click', () => { location.href = '/api/auth/logout'; });
 
+    initDropdownAudiencia();
     cargarSesion();
 })();

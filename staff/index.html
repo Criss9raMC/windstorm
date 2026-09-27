@@ -96,14 +96,24 @@
                         <textarea id="nota-cuerpo" rows="3" placeholder="Detalles de la tarea o el aviso..."></textarea>
                     </div>
                     <div class="field">
-                        <label for="nota-audiencia">¿Para quién es?</label>
-                        <select id="nota-audiencia">
-                            <option value="all">Todo el staff</option>
-                            <option value="constructor">Constructores</option>
-                            <option value="programador">Programadores</option>
-                            <option value="moderacion">Moderación</option>
-                            <option value="tester">Testers</option>
-                        </select>
+                        <label id="audiencia-label-txt">¿Para quién es?</label>
+                        <div class="dropdown" id="audiencia-dropdown">
+                            <button type="button" class="dropdown-toggle" id="audiencia-toggle"
+                                    aria-haspopup="listbox" aria-expanded="false" aria-labelledby="audiencia-label-txt">
+                                <span id="audiencia-actual">Todo el staff</span>
+                                <svg class="dropdown-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <div class="dropdown-menu" id="audiencia-menu" role="listbox" hidden>
+                                <button type="button" class="dropdown-option is-selected" data-value="all" role="option" aria-selected="true">Todo el staff</button>
+                                <button type="button" class="dropdown-option" data-value="admin" role="option" aria-selected="false">Admins</button>
+                                <button type="button" class="dropdown-option" data-value="constructor" role="option" aria-selected="false">Constructores</button>
+                                <button type="button" class="dropdown-option" data-value="programador" role="option" aria-selected="false">Programadores</button>
+                                <button type="button" class="dropdown-option" data-value="moderacion" role="option" aria-selected="false">Moderación</button>
+                                <button type="button" class="dropdown-option" data-value="tester" role="option" aria-selected="false">Testers</button>
+                            </div>
+                        </div>
                     </div>
                     <p id="nota-error" class="error" role="alert" hidden></p>
                     <div class="actions">
