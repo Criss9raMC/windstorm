@@ -1,5 +1,13 @@
 const db = require('./_lib/db');
 const { getSession } = require('./_lib/session');
+const { MANAGER_ROLES } = require('./_lib/roles');
+
+const AUDIENCIAS_VALIDAS = ['all', 'admin', 'constructor', 'programador', 'moderacion', 'tester'];
+
+function puedeGestionarTodo(session) {
+    const roles = Array.isArray(session.roles) ? session.roles : [];
+    return roles.some((r) => MANAGER_ROLES.includes(r));
+}
 
 module.exports = async (req, res) => {
     const session = await getSession(req);
@@ -10,8 +18,10 @@ module.exports = async (req, res) => {
 
     if (req.method === 'GET') {
         const roles = Array.isArray(session.roles) ? session.roles : [];
+        const puedeBorrarTodo = puedeGestionarTodo(session);
+
         const { rows } = await db.query(
-            `select n.id, n.title, n.body, n.audience, n.created_by, n.created_at,
+            `select n.id, n.title, n.body, n.audience, n.created_by, n.created_by_id, n.created_at,
                     exists(
                         select 1 from note_reads r
                         where r.note_id = n.id and r.discord_id = $1
@@ -26,7 +36,16 @@ module.exports = async (req, res) => {
              order by n.created_at desc`,
             [session.discord_id, roles]
         );
-        res.status(200).json({ notes: rows });
+
+        const notes = rows.map((n) => {
+            const esAutor = n.created_by_id
+                ? n.created_by_id === session.discord_id
+                : n.created_by === session.username; // notas viejas sin discord_id guardado
+            const { created_by_id, ...resto } = n;
+            return { ...resto, canDelete: puedeBorrarTodo || esAutor };
+        });
+
+        res.status(200).json({ notes });
         return;
     }
 
@@ -43,9 +62,7 @@ module.exports = async (req, res) => {
 
         const title = (data.title || '').trim();
         const text = (data.body || '').trim();
-        const audience = ['all', 'constructor', 'programador', 'moderacion', 'tester'].includes(data.audience)
-            ? data.audience
-            : 'all';
+        const audience = AUDIENCIAS_VALIDAS.includes(data.audience) ? data.audience : 'all';
 
         if (!title || !text) {
             res.status(400).json({ error: 'faltan_campos' });
@@ -53,10 +70,10 @@ module.exports = async (req, res) => {
         }
 
         const { rows } = await db.query(
-            `insert into notes (title, body, audience, created_by)
-             values ($1, $2, $3, $4)
+            `insert into notes (title, body, audience, created_by, created_by_id)
+             values ($1, $2, $3, $4, $5)
              returning id, title, body, audience, created_by, created_at`,
-            [title, text, audience, session.username]
+            [title, text, audience, session.username, session.discord_id]
         );
 
         const note = rows[0];
@@ -69,7 +86,43 @@ module.exports = async (req, res) => {
             [note.id, session.discord_id, session.username]
         );
 
-        res.status(201).json({ note: { ...note, read: true, readers: [{ username: session.username, read_at: new Date() }] } });
+        res.status(201).json({
+            note: {
+                ...note,
+                read: true,
+                canDelete: true,
+                readers: [{ username: session.username, read_at: new Date() }],
+            },
+        });
+        return;
+    }
+
+    if (req.method === 'DELETE') {
+        const url = new URL(req.url, `https://${req.headers.host}`);
+        const noteId = Number(url.searchParams.get('id'));
+        if (!noteId) {
+            res.status(400).json({ error: 'falta_id' });
+            return;
+        }
+
+        const { rows } = await db.query(`select created_by, created_by_id from notes where id = $1`, [noteId]);
+        if (rows.length === 0) {
+            res.status(404).json({ error: 'no_existe' });
+            return;
+        }
+
+        const nota = rows[0];
+        const esAutor = nota.created_by_id
+            ? nota.created_by_id === session.discord_id
+            : nota.created_by === session.username;
+
+        if (!puedeGestionarTodo(session) && !esAutor) {
+            res.status(403).json({ error: 'sin_permiso' });
+            return;
+        }
+
+        await db.query(`delete from notes where id = $1`, [noteId]);
+        res.status(200).json({ ok: true });
         return;
     }
 
