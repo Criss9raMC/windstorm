@@ -8,27 +8,15 @@
 .staff-card h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; }
 .staff-card .hint { margin-top: 6px; color: var(--muted); font-size: 0.95rem; }
 
-.roles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 26px; }
-.role {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px 18px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    color: var(--text);
-    font: 500 1rem var(--font-body);
-    text-align: left;
-    cursor: pointer;
-    transition: background .2s, border-color .2s;
-}
-.role:hover { background: rgba(0, 149, 255, 0.08); border-color: var(--accent); }
-.swatch { width: 10px; height: 10px; border-radius: 50%; flex: none; background: var(--c); box-shadow: 0 0 8px var(--c); }
+/* Botón "Iniciar sesión con Discord" */
+.btn-discord { background: #5865F2; }
+.btn-discord:hover { background: #6b74f5; box-shadow: 0 0 22px rgba(88, 101, 242, 0.4); }
 
 .field { margin-top: 24px; }
 .field label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--muted); }
-.field input {
+.field input,
+.field textarea,
+.field select {
     width: 100%;
     padding: 14px 16px;
     background: rgba(255, 255, 255, 0.03);
@@ -38,8 +26,11 @@
     font: 400 1rem var(--font-body);
     outline: none;
     transition: border-color .2s, box-shadow .2s;
+    resize: vertical;
 }
-.field input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 149, 255, 0.18); }
+.field input:focus,
+.field textarea:focus,
+.field select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 149, 255, 0.18); }
 
 .error { margin-top: 12px; color: #ff6b6b; font-size: 0.9rem; }
 .actions { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
@@ -47,30 +38,59 @@
 .badge {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 4px 14px;
+    padding: 3px 12px;
     border-radius: 999px;
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     font-weight: 600;
-    color: var(--c);
-    border: 1px solid var(--c);
-    background: color-mix(in srgb, var(--c) 14%, transparent);
-    margin-bottom: 14px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    background: rgba(0, 149, 255, 0.1);
 }
 
-.notes {
-    margin-top: 22px;
-    padding: 22px 24px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    color: #c4cddc;
-    white-space: pre-line;
-    overflow-wrap: anywhere;
+/* Tarjeta de "quién soy" arriba del panel, una vez conectado */
+.staff-user {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--line-soft);
 }
-.notes.loading { color: var(--accent); font-style: italic; }
+.staff-user img { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+.staff-user div { flex: 1; display: flex; flex-direction: column; gap: 4px; }
+.staff-user strong { font-size: 1rem; }
+.staff-user .btn { padding: 9px 16px; font-size: 0.88rem; }
+
+/* Lista de notas */
+.notes-list { margin-top: 18px; display: flex; flex-direction: column; gap: 12px; }
+
+.note-card {
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+}
+.note-card.unread { border-color: var(--accent); background: rgba(0, 149, 255, 0.05); }
+
+.note-top { display: flex; align-items: center; justify-content: space-between; }
+.note-audience { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.note-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+
+.note-card h3 { margin-top: 6px; font-size: 1rem; font-weight: 600; }
+.note-card p { margin-top: 4px; color: #c4cddc; font-size: 0.92rem; overflow-wrap: anywhere; }
+
+.note-meta {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+.note-seen { flex: none; cursor: default; }
 
 @media (max-width: 720px) {
     .staff-card { margin-top: 32px; padding: 26px 22px; }
-    .roles { grid-template-columns: 1fr; }
+    .staff-user { flex-wrap: wrap; }
 }

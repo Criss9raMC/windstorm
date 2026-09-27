@@ -52,44 +52,62 @@
                     <img class="brand-logo" src="../logo.png" alt="Escudo de WindStorm City Life RP">
                     <h1><span class="accent">WindStorm</span> Panel de staff</h1>
                 </div>
-                <p class="hero-desc">Acceso interno para el equipo. Elige tu rol para ver las indicaciones del proyecto.</p>
+                <p class="hero-desc">Acceso interno para el equipo. Inicia sesión con tu cuenta de Discord.</p>
             </div>
         </section>
 
         <div class="wrap">
             <section class="card staff-card">
 
-                <div id="pantalla-roles">
-                    <h2>Elige tu rol</h2>
-                    <p class="hint">Necesitarás la llave de acceso de tu equipo.</p>
-                    <div class="roles">
-                        <button class="role" data-rol="Constructor" style="--c:#22c55e"><i class="swatch"></i>Constructor</button>
-                        <button class="role" data-rol="Programador" style="--c:#a855f7"><i class="swatch"></i>Programador</button>
-                        <button class="role" data-rol="Moderador" style="--c:#eab308"><i class="swatch"></i>Moderador</button>
-                        <button class="role" data-rol="Tester" style="--c:#06b6d4"><i class="swatch"></i>Tester</button>
-                    </div>
+                <div id="pantalla-cargando">
+                    <p class="hint">Verificando tu sesión…</p>
                 </div>
 
-                <div id="pantalla-password" hidden>
-                    <h2>Acceso de <span id="txt-rango-bloqueado" style="color: var(--accent)"></span></h2>
-                    <div class="field">
-                        <label for="input-llave">Llave de acceso</label>
-                        <input type="password" id="input-llave" placeholder="Pega la contraseña aquí" autocomplete="off">
-                    </div>
-                    <p id="error-texto" class="error" role="alert" hidden>Contraseña incorrecta.</p>
+                <div id="pantalla-login" hidden>
+                    <h2>Inicia sesión con Discord</h2>
+                    <p class="hint">Usamos tu cuenta de Discord para comprobar si perteneces al staff y qué rol tienes.</p>
+                    <p id="login-error" class="error" role="alert" hidden></p>
                     <div class="actions">
-                        <button class="btn" id="btn-ingresar" type="button">Ingresar al panel</button>
-                        <button class="btn btn-ghost" id="btn-volver" type="button">Volver</button>
+                        <a class="btn btn-discord" href="/api/auth/login">Iniciar sesión con Discord</a>
                     </div>
                 </div>
 
                 <div id="pantalla-panel" hidden>
-                    <span id="badge-dinamico" class="badge">Rol</span>
-                    <h2>Bitácora de actividades</h2>
-                    <p class="hint">Indicaciones en tiempo real para tu equipo.</p>
-                    <div id="contenido-dinamico" class="notes loading" aria-live="polite">Conectando con la bitácora...</div>
-                    <div class="actions">
+                    <div class="staff-user">
+                        <img id="user-avatar" alt="" width="40" height="40">
+                        <div>
+                            <strong id="user-nombre"></strong>
+                            <span id="badge-dinamico" class="badge">Rol</span>
+                        </div>
                         <button class="btn btn-ghost" id="btn-salir" type="button">Cerrar sesión</button>
+                    </div>
+
+                    <h2>Notas y pendientes</h2>
+                    <p class="hint">Se marcan como vistas solo, cuando entras a revisarlas.</p>
+                    <div id="lista-notas" class="notes-list" aria-live="polite"></div>
+
+                    <h2 style="margin-top: 32px;">Escribir una nota nueva</h2>
+                    <div class="field">
+                        <label for="nota-titulo">Título</label>
+                        <input type="text" id="nota-titulo" placeholder="Ej. Revisar el spawn nuevo">
+                    </div>
+                    <div class="field">
+                        <label for="nota-cuerpo">Nota</label>
+                        <textarea id="nota-cuerpo" rows="3" placeholder="Detalles de la tarea o el aviso..."></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="nota-audiencia">¿Para quién es?</label>
+                        <select id="nota-audiencia">
+                            <option value="all">Todo el staff</option>
+                            <option value="constructor">Constructores</option>
+                            <option value="programador">Programadores</option>
+                            <option value="moderacion">Moderación</option>
+                            <option value="tester">Testers</option>
+                        </select>
+                    </div>
+                    <p id="nota-error" class="error" role="alert" hidden></p>
+                    <div class="actions">
+                        <button class="btn" id="btn-publicar" type="button">Publicar nota</button>
                     </div>
                 </div>
 
@@ -102,71 +120,7 @@
         <a href="../">Volver a la página principal</a>
     </footer>
 
-    <script>
-        let rangoSeleccionado = "";
-
-        const contraseñas = {
-            "Constructor": "A15W2S7C1",
-            "Programador": "CryptWS!26",
-            "Moderador": "WSx0dM2gg",
-            "Tester": "WSt3St!26"
-        };
-
-        const urlsPorRol = {
-            "Constructor": "https://gist.githubusercontent.com/Criss9raMC/0c511023db7d8421053e63c620978f51/raw/80fb21cab20f8fa0f853315d52990c38afa3a653/notas_constructores.txt",
-            "Programador": "https://gist.githubusercontent.com/Criss9raMC/a47c70e81f8699261618b0c62ec9f574/raw/4e09670a54d1b316d4a33d780bd9c2fb48ad5fe0/notas_programadores.txt",
-            "Moderador": "https://gist.githubusercontent.com/Criss9raMC/9861c7d7ee133e926b28cc918b04aca9/raw/5767b3775b1c160b8fd8ccf0138c93685bf3da5c/notas_moderadores.txt",
-            "Tester": "https://gist.githubusercontent.com/Criss9raMC/02ebe9f1d1c2622beba6f898b78684a6/raw/6f1455d141cd6c0a32a395a96d4b345aafc29ff8/notas_testers.txt"
-        };
-
-        const colores = { "Constructor": "#22c55e", "Programador": "#a855f7", "Moderador": "#eab308", "Tester": "#06b6d4" };
-
-        const $ = id => document.getElementById(id);
-        const pantallas = ["pantalla-roles", "pantalla-password", "pantalla-panel"];
-        function mostrar(id) { pantallas.forEach(p => { $(p).hidden = p !== id; }); }
-
-        function irAPassword(rango) {
-            rangoSeleccionado = rango;
-            $("txt-rango-bloqueado").textContent = rango;
-            $("input-llave").value = "";
-            $("error-texto").hidden = true;
-            mostrar("pantalla-password");
-            $("input-llave").focus();
-        }
-
-        function verificarPassword() {
-            if ($("input-llave").value.trim() === contraseñas[rangoSeleccionado]) {
-                desplegarPanel();
-            } else {
-                $("error-texto").hidden = false;
-            }
-        }
-
-        function desplegarPanel() {
-            mostrar("pantalla-panel");
-            const badge = $("badge-dinamico");
-            badge.textContent = rangoSeleccionado;
-            badge.style.setProperty("--c", colores[rangoSeleccionado]);
-
-            const caja = $("contenido-dinamico");
-            caja.className = "notes loading";
-            caja.textContent = "Cargando indicaciones de la ciudad...";
-
-            fetch(urlsPorRol[rangoSeleccionado] + "?t=" + Date.now())
-                .then(r => { if (!r.ok) throw new Error(); return r.text(); })
-                .then(texto => { caja.className = "notes"; caja.textContent = texto; })
-                .catch(() => {
-                    caja.className = "notes";
-                    caja.textContent = "No se pudo cargar la bitácora. Revisa que el enlace sea correcto y que la nota sea pública.";
-                });
-        }
-
-        document.querySelectorAll(".role").forEach(b => b.addEventListener("click", () => irAPassword(b.dataset.rol)));
-        $("btn-ingresar").addEventListener("click", verificarPassword);
-        $("input-llave").addEventListener("keydown", e => { if (e.key === "Enter") verificarPassword(); });
-        $("btn-volver").addEventListener("click", () => mostrar("pantalla-roles"));
-        $("btn-salir").addEventListener("click", () => mostrar("pantalla-roles"));
-    </script>
+    <script src="app.js?v=1" defer></script>
     <script src="../nav.js?v=2" defer></script>
 </body>
 </html>
