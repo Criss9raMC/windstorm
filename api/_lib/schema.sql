@@ -14,13 +14,17 @@ create table if not exists sessions (
 );
 
 create table if not exists notes (
-    id          serial primary key,
-    title       text not null,
-    body        text not null,
-    audience    text not null default 'all', -- 'all' | 'constructor' | 'programador' | 'moderacion' | 'tester'
-    created_by  text not null,               -- username de Discord de quien la escribió
-    created_at  timestamptz not null default now()
+    id             serial primary key,
+    title          text not null,
+    body           text not null,
+    audience       text not null default 'all', -- 'all' | 'admin' | 'constructor' | 'programador' | 'moderacion' | 'tester'
+    created_by     text not null,               -- username de Discord de quien la escribió
+    created_by_id  text,                        -- discord_id del autor (para saber si puede borrarla)
+    created_at     timestamptz not null default now()
 );
+
+-- Migración: si la tabla ya existía de antes, le agrega la columna nueva.
+alter table notes add column if not exists created_by_id text;
 
 create table if not exists note_reads (
     note_id     integer not null references notes(id) on delete cascade,
