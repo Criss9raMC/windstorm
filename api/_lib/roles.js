@@ -3,17 +3,19 @@
 // Discord, solo actualiza este archivo.
 
 const ROLE_MAP = {
+    '1508972632014459052': { key: 'admin', label: 'Admin', color: '#f43f5e' },
     '1508980854137946254': { key: 'constructor', label: 'Constructor', color: '#22c55e' },
     '1509086537189560382': { key: 'programador', label: 'Programador', color: '#a855f7' },
-    '1508972632014459052': { key: 'moderacion', label: 'Moderación', color: '#eab308' },
     '1509342315477733386': { key: 'moderacion', label: 'Moderación', color: '#eab308' },
     '1509073843602591796': { key: 'moderacion', label: 'Moderación', color: '#eab308' },
     '1509641010240819400': { key: 'tester', label: 'Tester', color: '#06b6d4' },
 };
 
 // Orden de prioridad para decidir el "rol principal" a mostrar cuando
-// alguien tiene más de uno.
-const PRIORITY = ['programador', 'moderacion', 'constructor', 'tester'];
+// alguien tiene más de uno. Admin y Moderación pueden borrar cualquier
+// nota (ver MANAGER_ROLES en notes.js); por ahora no hay más diferencia
+// entre los dos.
+const PRIORITY = ['admin', 'programador', 'moderacion', 'constructor', 'tester'];
 
 /**
  * Recibe la lista de IDs de rol que Discord devuelve para el miembro y
@@ -42,4 +44,9 @@ function resolveRoles(discordRoleIds) {
     };
 }
 
-module.exports = { ROLE_MAP, resolveRoles };
+// Roles que pueden borrar la nota de cualquier persona (no solo la propia).
+// Hoy Admin y Moderación hacen lo mismo; si en el futuro quieres darle algo
+// extra solo a Admin, aquí es donde se separarían.
+const MANAGER_ROLES = ['admin', 'moderacion'];
+
+module.exports = { ROLE_MAP, resolveRoles, MANAGER_ROLES };
