@@ -148,7 +148,6 @@
             s.textContent = total != null ? fmt(total) + ' miembros' : (online != null ? fmt(online) + ' en línea' : '—');
         }
 
-        // Conteo real desde la invitación; si falla, usa el widget del servidor.
         fetch(`https://discord.com/api/v9/invites/${INVITE}?with_counts=true`)
             .then(r => { if (!r.ok) throw new Error(); return r.json(); })
             .then(d => pintar(d.approximate_member_count, d.approximate_presence_count))
