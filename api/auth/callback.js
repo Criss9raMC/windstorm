@@ -70,9 +70,9 @@ module.exports = async (req, res) => {
             ? `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=64`
             : null;
 
-        const session = await createSession({
-            discordId: user.id,
-            username: user.username,
+     const session = await createSession({
+    discordId: user.id,
+    username: member.nick || user.global_name || user.username,
             avatar,
             roleKey: resolved.primary.key,
             roleLabel: resolved.primary.label,
