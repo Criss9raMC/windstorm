@@ -427,3 +427,6 @@ a { color: inherit; text-decoration: none; }
     object-fit: contain;
     object-position: bottom center;
 }
+.colab-card.top .avatar {
+    background: radial-gradient(ellipse at 50% 30%, rgba(0, 149, 255, 0.45), rgba(0, 149, 255, 0.12) 75%);
+}
