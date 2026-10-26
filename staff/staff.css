@@ -1,0 +1,182 @@
+/* Panel de staff: complementa ../home.css */
+.hero-compact .hero-inner { padding: 56px 32px 52px; }
+.hero-compact .brand-logo { height: clamp(84px, 11vw, 120px); }
+.hero-compact h1 { font-size: clamp(2rem, 4.4vw, 3.2rem); }
+.hero-compact .hero-desc { margin-top: 22px; }
+
+.staff-card { max-width: 640px; margin: 56px auto 0; padding: 36px 40px; }
+.staff-card h2 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; letter-spacing: -0.01em; }
+.staff-card .hint { margin-top: 6px; color: var(--muted); font-size: 0.95rem; }
+
+/* Botón "Iniciar sesión con Discord" */
+.btn-discord { background: #5865F2; }
+.btn-discord:hover { background: #6b74f5; box-shadow: 0 0 22px rgba(88, 101, 242, 0.4); }
+
+.field { margin-top: 24px; }
+.field label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: var(--muted); }
+.field input,
+.field textarea {
+    width: 100%;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--text);
+    font: 400 1rem var(--font-body);
+    outline: none;
+    transition: border-color .2s, box-shadow .2s;
+    resize: vertical;
+}
+.field input:focus,
+.field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 149, 255, 0.18); }
+
+/* Menú desplegable flotante (reemplaza el <select> nativo, que se veía
+   blanco sobre blanco en varios navegadores) */
+.dropdown { position: relative; }
+
+.dropdown-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 14px 16px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    color: var(--text);
+    font: 400 1rem var(--font-body);
+    text-align: left;
+    cursor: pointer;
+    transition: border-color .2s, box-shadow .2s;
+}
+.dropdown-toggle:hover { border-color: var(--accent); }
+.dropdown-toggle[aria-expanded="true"] { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0, 149, 255, 0.18); }
+.dropdown-chev { width: 18px; height: 18px; flex: none; color: var(--muted); transition: transform .2s; }
+.dropdown-toggle[aria-expanded="true"] .dropdown-chev { transform: rotate(180deg); color: var(--accent); }
+
+.dropdown-menu {
+    position: absolute;
+    z-index: 20;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    padding: 6px;
+    background: #0c1930;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+}
+
+.dropdown-option {
+    display: block;
+    width: 100%;
+    padding: 11px 12px;
+    background: transparent;
+    border: 0;
+    border-radius: 8px;
+    color: var(--text);
+    font: 400 0.95rem var(--font-body);
+    text-align: left;
+    cursor: pointer;
+}
+.dropdown-option:hover { background: rgba(0, 149, 255, 0.1); }
+.dropdown-option.is-selected { color: var(--accent); font-weight: 600; }
+
+.error { margin-top: 12px; color: #ff6b6b; font-size: 0.9rem; }
+.actions { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 12px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    background: rgba(0, 149, 255, 0.1);
+}
+
+/* Tarjeta de "quién soy" arriba del panel, una vez conectado */
+.staff-user {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--line-soft);
+}
+.staff-user img { width: 40px; height: 40px; border-radius: 50%; flex: none; }
+.staff-user div { flex: 1; display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+.staff-user strong { font-size: 1rem; }
+.staff-user .btn { padding: 9px 16px; font-size: 0.88rem; }
+
+/* Lista de notas */
+.notes-list { margin-top: 18px; display: flex; flex-direction: column; gap: 12px; }
+
+.note-card {
+    padding: 16px 18px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--line-soft);
+    border-radius: 12px;
+}
+.note-card.unread { border-color: var(--accent); background: rgba(0, 149, 255, 0.05); }
+
+.note-top { display: flex; align-items: center; justify-content: space-between; }
+.note-audience { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); }
+.note-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 6px var(--accent); }
+
+.note-card h3 { margin-top: 6px; font-size: 1rem; font-weight: 600; }
+.note-card p { margin-top: 4px; color: #c4cddc; font-size: 0.92rem; overflow-wrap: anywhere; }
+
+.note-meta {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 0.8rem;
+    color: var(--muted);
+}
+.note-meta-actions { display: flex; align-items: center; gap: 10px; flex: none; }
+
+.note-seen {
+    background: transparent;
+    border: 0;
+    padding: 2px 4px;
+    color: var(--muted);
+    font: inherit;
+    cursor: pointer;
+    border-radius: 6px;
+}
+.note-seen:hover { color: var(--accent); background: rgba(0, 149, 255, 0.08); }
+
+.note-delete {
+    background: transparent;
+    border: 0;
+    padding: 2px 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border-radius: 6px;
+    opacity: 0.75;
+}
+.note-delete:hover { opacity: 1; background: rgba(255, 107, 107, 0.12); }
+
+.note-readers {
+    margin-top: 10px;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--line-soft);
+    border-radius: 10px;
+    font-size: 0.82rem;
+    color: #c4cddc;
+}
+.note-readers li { list-style: none; padding: 3px 0; }
+.note-readers li span { color: var(--muted); }
+.note-readers li.empty { color: var(--muted); font-style: italic; }
+
+@media (max-width: 720px) {
+    .staff-card { margin-top: 32px; padding: 26px 22px; }
+    .staff-user { flex-wrap: wrap; }
+}

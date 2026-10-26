@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de staff | WindStorm City Life RP</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#020813">
+
+    <link rel="icon" href="../data/favicon.ico" sizes="any">
+    <link rel="icon" href="../data/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="../data/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../home.css?v=2">
+    <link rel="stylesheet" href="staff.css?v=2">
+</head>
+<body>
+
+    <header class="nav">
+        <a class="nav-logo" href="../" aria-label="WindStorm, inicio">
+            <img src="../data/logo.png" alt="">
+        </a>
+        <nav class="nav-links" aria-label="Principal">
+            <a href="../">Inicio</a>
+            <a href="../informacion/">Información</a>
+            <a href="../redes-sociales/">Redes Sociales</a>
+            <a href="../colaboradores/">Colaboradores</a>
+            <a href="./" aria-current="page">Panel de staff</a>
+        </nav>
+        <button class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+    <div class="nav-mobile-panel" id="menu-movil">
+        <nav aria-label="Principal (móvil)">
+            <a href="../">Inicio</a>
+            <a href="../informacion/">Información</a>
+            <a href="../redes-sociales/">Redes Sociales</a>
+            <a href="../colaboradores/">Colaboradores</a>
+            <a href="./" aria-current="page">Panel de staff</a>
+        </nav>
+    </div>
+
+    <main>
+        <section class="hero hero-compact">
+            <img class="hero-bg" src="../data/imagen.png" alt="">
+            <div class="hero-inner">
+                <div class="brand-row">
+                    <img class="brand-logo" src="../data/logo.png" alt="Escudo de WindStorm City Life RP">
+                    <h1><span class="accent">WindStorm</span> Panel de staff</h1>
+                </div>
+                <p class="hero-desc">Acceso interno para el equipo. Inicia sesión con tu cuenta de Discord.</p>
+            </div>
+        </section>
+
+        <div class="wrap">
+            <section class="card staff-card">
+
+                <div id="pantalla-cargando">
+                    <p class="hint">Verificando tu sesión…</p>
+                </div>
+
+                <div id="pantalla-login" hidden>
+                    <h2>Inicia sesión con Discord</h2>
+                    <p class="hint">Usamos tu cuenta de Discord para comprobar si perteneces al staff y qué rol tienes.</p>
+                    <p id="login-error" class="error" role="alert" hidden></p>
+                    <div class="actions">
+                        <a class="btn btn-discord" href="/api/auth/login">Iniciar sesión con Discord</a>
+                    </div>
+                </div>
+
+                <div id="pantalla-panel" hidden>
+                    <div class="staff-user">
+                        <img id="user-avatar" alt="" width="40" height="40">
+                        <div>
+                            <strong id="user-nombre"></strong>
+                            <span id="badge-dinamico" class="badge">Rol</span>
+                        </div>
+                        <button class="btn btn-ghost" id="btn-salir" type="button">Cerrar sesión</button>
+                    </div>
+
+                    <h2>Notas y pendientes</h2>
+                    <p class="hint">Se marcan como vistas solo, cuando entras a revisarlas.</p>
+                    <div id="lista-notas" class="notes-list" aria-live="polite"></div>
+
+                    <h2 style="margin-top: 32px;">Escribir una nota nueva</h2>
+                    <div class="field">
+                        <label for="nota-titulo">Título</label>
+                        <input type="text" id="nota-titulo" placeholder="Ej. Revisar el spawn nuevo">
+                    </div>
+                    <div class="field">
+                        <label for="nota-cuerpo">Nota</label>
+                        <textarea id="nota-cuerpo" rows="3" placeholder="Detalles de la tarea o el aviso..."></textarea>
+                    </div>
+                    <div class="field">
+                        <label id="audiencia-label-txt">¿Para quién es?</label>
+                        <div class="dropdown" id="audiencia-dropdown">
+                            <button type="button" class="dropdown-toggle" id="audiencia-toggle"
+                                    aria-haspopup="listbox" aria-expanded="false" aria-labelledby="audiencia-label-txt">
+                                <span id="audiencia-actual">Todo el staff</span>
+                                <svg class="dropdown-chev" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                                    <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            <div class="dropdown-menu" id="audiencia-menu" role="listbox" hidden>
+                                <button type="button" class="dropdown-option is-selected" data-value="all" role="option" aria-selected="true">Todo el staff</button>
+                                <button type="button" class="dropdown-option" data-value="admin" role="option" aria-selected="false">Admins</button>
+                                <button type="button" class="dropdown-option" data-value="constructor" role="option" aria-selected="false">Constructores</button>
+                                <button type="button" class="dropdown-option" data-value="programador" role="option" aria-selected="false">Programadores</button>
+                                <button type="button" class="dropdown-option" data-value="moderacion" role="option" aria-selected="false">Moderación</button>
+                                <button type="button" class="dropdown-option" data-value="tester" role="option" aria-selected="false">Testers</button>
+                            </div>
+                        </div>
+                    </div>
+                    <p id="nota-error" class="error" role="alert" hidden></p>
+                    <div class="actions">
+                        <button class="btn" id="btn-publicar" type="button">Publicar nota</button>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <span>© WindStorm</span>
+        <a href="../">Volver a la página principal</a>
+    </footer>
+
+    <script src="app.js?v=1" defer></script>
+    <script src="../nav.js?v=2" defer></script>
+</body>
+</html>
