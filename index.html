@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WindStorm City Life RP | Servidor de Minecraft</title>
+    <meta name="description" content="Explora una ciudad sin límites donde tu libertad es la única regla. Servidor de Minecraft Bedrock en desarrollo.">
+    <meta name="theme-color" content="#020813">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="WindStorm City Life RP | Servidor de Minecraft">
+    <meta property="og:description" content="Explora una ciudad sin límites donde tu libertad es la única regla.">
+
+    <link rel="icon" href="data/favicon.ico" sizes="any">
+    <link rel="icon" href="data/favicon.png" type="image/png">
+    <link rel="apple-touch-icon" href="data/apple-touch-icon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="home.css?v=2">
+</head>
+<body>
+    <header class="nav">
+        <a class="nav-logo" href="#inicio" aria-label="WindStorm, inicio">
+            <img src="data/logo.png" alt="">
+        </a>
+        <nav class="nav-links" aria-label="Principal">
+            <a href="#inicio" aria-current="page">Inicio</a>
+            <a href="informacion/">Información</a>
+            <a href="redes-sociales/">Redes Sociales</a>
+            <a href="colaboradores/">Colaboradores</a>
+        </nav>
+        <button class="nav-burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu-movil">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+    <div class="nav-mobile-panel" id="menu-movil">
+        <nav aria-label="Principal (móvil)">
+            <a href="#inicio" aria-current="page">Inicio</a>
+            <a href="informacion/">Información</a>
+            <a href="redes-sociales/">Redes Sociales</a>
+            <a href="colaboradores/">Colaboradores</a>
+            <a href="staff/">Panel de staff</a>
+        </nav>
+    </div>
+
+    <main>
+        <section class="hero" id="inicio">
+            <img class="hero-bg" src="data/imagen.png" alt="">
+            <div class="hero-inner">
+                <div class="brand-row">
+                    <img class="brand-logo" src="data/logo.png" alt="Escudo de WindStorm City Life RP">
+                    <h1><span class="accent">WindStorm</span> Servidor de Minecraft</h1>
+                </div>
+                <p class="hero-desc">
+                    Explora una ciudad sin límites donde tu libertad es la única regla.
+                    El servidor está en desarrollo: únete a la comunidad para seguir los
+                    avances y aportar ideas.
+                </p>
+
+                <div class="hero-links">
+                    <a href="informacion/">Información</a>
+                    <a href="https://discord.gg/qnxMMkYfgz" target="_blank" rel="noopener">Discord →</a>
+                </div>
+
+                <dl class="stats">
+                    <div class="stat"><dt>Edición</dt><dd>Bedrock</dd></div>
+                    <div class="stat"><dt>Estado</dt><dd>En desarrollo</dd></div>
+                    <div class="stat"><dt>Discord</dt><dd id="stat-discord">...</dd></div>
+                </dl>
+            </div>
+        </section>
+
+        <div class="wrap">
+            <section class="card discord-card" aria-label="Comunidad de Discord">
+                <div class="icon"><img src="data/idk1kDTKQj_1780205813460.png" alt="Discord"></div>
+                <div class="info">
+                    <h2>Comunidad WindStorm</h2>
+                    <p class="counts">
+                        <span><i class="dot"></i><b id="discord-total" style="font-weight:400">--</b> en total</span>
+                        <span><i class="dot on"></i><b id="discord-online" style="font-weight:400">--</b> en línea</span>
+                    </p>
+                </div>
+                <a class="btn" href="https://discord.gg/qnxMMkYfgz" target="_blank" rel="noopener">Unirme al Discord</a>
+            </section>
+
+            <div class="social-grid" aria-label="Redes sociales">
+                <div class="card social-card">
+                    <div class="icon youtube" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="1.5" y="5" width="21" height="14" rx="4.5" stroke="currentColor" stroke-width="1.6"/>
+                            <path d="M10 8.7L15 12l-5 3.3V8.7z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="info">
+                        <h3>YouTube</h3>
+                        <p class="handle">@Criss_ra9</p>
+                    </div>
+                    <a class="btn btn-yt" href="https://www.youtube.com/@Criss_ra9" target="_blank" rel="noopener">Suscribirme</a>
+                </div>
+
+                <div class="card social-card">
+                    <div class="icon tiktok" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 3v10.2a3.3 3.3 0 1 1-2.6-3.22V7.3a5.9 5.9 0 1 0 5.1 5.85V9.9a6.6 6.6 0 0 0 3.9 1.27V8.5a4.1 4.1 0 0 1-2.6-1.02A4.1 4.1 0 0 1 16.5 3H14z" fill="currentColor"/>
+                        </svg>
+                    </div>
+                    <div class="info">
+                        <h3>TikTok</h3>
+                        <p class="handle">@criss_ra9</p>
+                    </div>
+                    <a class="btn btn-tiktok" href="https://www.tiktok.com/@criss_ra9" target="_blank" rel="noopener">Seguir</a>
+                </div>
+
+                <a class="card social-card" href="redes-sociales/" style="cursor:pointer">
+                    <div class="icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="3" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                            <rect x="13" y="3" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                            <rect x="3" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                            <rect x="13" y="13" width="8" height="8" rx="2" stroke="currentColor" stroke-width="1.6"/>
+                        </svg>
+                    </div>
+                    <div class="info">
+                        <h3>Ver videos</h3>
+                        <p class="handle">Última publicación de YouTube y TikTok</p>
+                    </div>
+                    <span class="btn btn-ghost">Abrir</span>
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <span>© WindStorm</span>
+        <a href="staff/">Panel de staff</a>
+    </footer>
+
+    <script>
+        const INVITE = 'qnxMMkYfgz';
+        const GUILD = '1508959317544407140';
+        const fmt = n => Number(n).toLocaleString('es-MX');
+
+        function pintar(total, online) {
+            if (total != null) document.getElementById('discord-total').textContent = fmt(total);
+            if (online != null) document.getElementById('discord-online').textContent = fmt(online);
+            const s = document.getElementById('stat-discord');
+            s.textContent = total != null ? fmt(total) + ' miembros' : (online != null ? fmt(online) + ' en línea' : '—');
+        }
+
+        fetch(`https://discord.com/api/v9/invites/${INVITE}?with_counts=true`)
+            .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+            .then(d => pintar(d.approximate_member_count, d.approximate_presence_count))
+            .catch(() =>
+                fetch(`https://discord.com/api/guilds/${GUILD}/widget.json`)
+                    .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+                    .then(d => pintar(null, d.presence_count))
+                    .catch(() => pintar(null, null))
+            );
+    </script>
+    <script src="nav.js?v=2" defer></script>
+</body>
+</html>
