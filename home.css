@@ -18,6 +18,15 @@
 [hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 70px; background: #020813 var(--bg-grad) no-repeat; background-size: 100% 100%; }
+html { scrollbar-color: var(--btn) #020813; scrollbar-width: thin; }
+html::-webkit-scrollbar { width: 12px; }
+html::-webkit-scrollbar-track { background: #020813; }
+html::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--accent), var(--btn));
+    border: 3px solid #020813;
+    border-radius: 999px;
+}
+html::-webkit-scrollbar-thumb:hover { background: var(--btn-hover); }
 
 body {
     min-height: 100vh;
