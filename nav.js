@@ -4,10 +4,18 @@
     var burger = document.querySelector('.nav-burger');
     if (!nav || !burger) return;
 
-    function cerrar() { nav.classList.remove('is-open'); }
+    function actualizarEstado() {
+        burger.setAttribute('aria-expanded', nav.classList.contains('is-open') ? 'true' : 'false');
+    }
+
+    function cerrar() {
+        nav.classList.remove('is-open');
+        actualizarEstado();
+    }
 
     burger.addEventListener('click', function () {
         nav.classList.toggle('is-open');
+        actualizarEstado();
     });
 
     document.querySelectorAll('.nav-mobile-panel a').forEach(function (a) {
