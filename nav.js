@@ -1,5 +1,47 @@
 // Menú de hamburguesa, solo activo visualmente en móvil (ver home.css).
 (function () {
+    function animarLetras() {
+        var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduceMotion) return;
+
+        document.querySelectorAll('main h1, main h2, main h3').forEach(function (heading) {
+            var accessibleText = heading.textContent.replace(/\s+/g, ' ').trim();
+            if (!accessibleText) return;
+
+            var walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
+            var textNodes = [];
+            while (walker.nextNode()) textNodes.push(walker.currentNode);
+
+            var letterIndex = 0;
+            heading.setAttribute('aria-label', accessibleText);
+            textNodes.forEach(function (textNode) {
+                var fragment = document.createDocumentFragment();
+                var tokens = textNode.nodeValue.match(/\s+|\S+/g) || [];
+                tokens.forEach(function (token) {
+                    if (/^\s+$/.test(token)) {
+                        fragment.appendChild(document.createTextNode(token));
+                        return;
+                    }
+
+                    var word = document.createElement('span');
+                    word.className = 'letter-word';
+                    Array.from(token).forEach(function (character) {
+                        var letter = document.createElement('span');
+                        letter.className = 'letter-char';
+                        letter.setAttribute('aria-hidden', 'true');
+                        letter.style.setProperty('--letter-index', letterIndex++);
+                        letter.textContent = character;
+                        word.appendChild(letter);
+                    });
+                    fragment.appendChild(word);
+                });
+                textNode.parentNode.replaceChild(fragment, textNode);
+            });
+
+            if (letterIndex) heading.classList.add('letters-animating');
+        });
+    }
+
     var loaderStarted = window.__windstormLoadStarted;
     if (typeof loaderStarted === 'number') {
         function ocultarPantallaDeCarga() {
@@ -9,13 +51,16 @@
 
         function terminarCargaInicial() {
             var remaining = Math.max(0, 500 - (Date.now() - loaderStarted));
-            window.setTimeout(ocultarPantallaDeCarga, remaining);
+            window.setTimeout(function () {
+                ocultarPantallaDeCarga();
+                animarLetras();
+            }, remaining);
         }
 
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', terminarCargaInicial, { once: true });
-        } else {
+        if (document.readyState === 'complete') {
             terminarCargaInicial();
+        } else {
+            window.addEventListener('load', terminarCargaInicial, { once: true });
         }
     }
 
