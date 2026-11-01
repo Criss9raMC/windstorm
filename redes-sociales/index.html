@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script>
+        document.documentElement.classList.add('is-loading');
+        window.__windstormLoadStarted = Date.now();
+        window.__windstormLoaderTimeout = window.setTimeout(function () {
+            document.documentElement.classList.remove('is-loading');
+        }, 2500);
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redes Sociales | WindStorm City Life RP</title>
@@ -14,11 +21,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../home.css?v=2">
+    <link rel="stylesheet" href="../home.css?v=4">
 
     <script async src="https://www.tiktok.com/embed.js"></script>
 </head>
 <body>
+    <div class="page-loader" role="status" aria-live="polite">
+        <span class="page-loader-spinner" aria-hidden="true"></span>
+        <span class="page-loader-name">WindStorm</span>
+        <span class="page-loader-message">Preparando tu llegada...</span>
+    </div>
 
     <header class="nav">
         <a class="nav-logo" href="../" aria-label="WindStorm, inicio">
@@ -128,6 +140,6 @@
         <a href="../staff/">Panel de staff</a>
     </footer>
 
-    <script src="../nav.js?v=3" defer></script>
+    <script src="../nav.js?v=5" defer></script>
 </body>
 </html>
